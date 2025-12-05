@@ -78,7 +78,7 @@ users_df['Średnia'] = round((users_df['Wynik spółka 1'] + users_df['Wynik sp�
 
 users_df = users_df.rename(columns={"Username": "Użytkownik", "Stock1": "Spółka 1", "Stock2": "Spółka 2", "Stock3": "Spółka 3"})
 all_prices = all_prices.rename(columns={"name": "Spółka", "yesterday": "Wczoraj", "diff": "Różnica"})[['Spółka', '2025-01-02', 'Wczoraj', 'Różnica']]
-https://github.com/AdamBankz/kick-viewbot
+
 # === APLIKACJA ===
 st.set_page_config(
     page_title="Ranking giełdowy",
@@ -97,4 +97,5 @@ st.dataframe(all_prices, width='stretch')
 st.markdown(
     "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
     unsafe_allow_html=True,
+
 )
