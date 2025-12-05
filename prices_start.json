@@ -1,0 +1,522 @@
+[
+  {
+    "source": "STOOQ",
+    "ticker": "HUG",
+    "price": 17.86
+  },
+  {
+    "source": "YF",
+    "ticker": "XTB.WA",
+    "price": 67.79
+  },
+  {
+    "source": "YF",
+    "ticker": "11B.WA",
+    "price": 177.2
+  },
+  {
+    "source": "YF",
+    "ticker": "DNP.WA",
+    "price": 40.11
+  },
+  {
+    "source": "YF",
+    "ticker": "UBI.PA",
+    "price": 12.86
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "SUN",
+    "price": 4.13
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "AST",
+    "price": 42.64
+  },
+  {
+    "source": "YF",
+    "ticker": "TXT.WA",
+    "price": 65.28
+  },
+  {
+    "source": "YF",
+    "ticker": "TSLA",
+    "price": 379.28
+  },
+  {
+    "source": "YF",
+    "ticker": "MUR.WA",
+    "price": 32.29
+  },
+  {
+    "source": "YF",
+    "ticker": "VLA.PA",
+    "price": 2.31
+  },
+  {
+    "source": "YF",
+    "ticker": "RGTI",
+    "price": 20.0
+  },
+  {
+    "source": "YF",
+    "ticker": "AMZN",
+    "price": 220.22
+  },
+  {
+    "source": "YF",
+    "ticker": "PANW",
+    "price": 180.74
+  },
+  {
+    "source": "YF",
+    "ticker": "RLEA",
+    "price": 5.8
+  },
+  {
+    "source": "YF",
+    "ticker": "RPI.L",
+    "price": 662.0
+  },
+  {
+    "source": "YF",
+    "ticker": "MNST",
+    "price": 52.31
+  },
+  {
+    "source": "YF",
+    "ticker": "PBX.WA",
+    "price": 18.66
+  },
+  {
+    "source": "YF",
+    "ticker": "AGO.WA",
+    "price": 10.14
+  },
+  {
+    "source": "YF",
+    "ticker": "ENA.WA",
+    "price": 12.68
+  },
+  {
+    "source": "YF",
+    "ticker": "GAZP.ME",
+    "price": 128.66
+  },
+  {
+    "source": "YF",
+    "ticker": "IRDM",
+    "price": 29.03
+  },
+  {
+    "source": "YF",
+    "ticker": "NNOX",
+    "price": 8.87
+  },
+  {
+    "source": "YF",
+    "ticker": "PLTR",
+    "price": 75.19
+  },
+  {
+    "source": "YF",
+    "ticker": "AMB.WA",
+    "price": 22.28
+  },
+  {
+    "source": "YF",
+    "ticker": "KRU.WA",
+    "price": 399.89
+  },
+  {
+    "source": "YF",
+    "ticker": "SPOT",
+    "price": 457.79
+  },
+  {
+    "source": "YF",
+    "ticker": "LLY",
+    "price": 772.31
+  },
+  {
+    "source": "YF",
+    "ticker": "TTWO",
+    "price": 183.07
+  },
+  {
+    "source": "YF",
+    "ticker": "MSFT",
+    "price": 415.51
+  },
+  {
+    "source": "YF",
+    "ticker": "PLW.WA",
+    "price": 263.99
+  },
+  {
+    "source": "YF",
+    "ticker": "SEK.WA",
+    "price": 9.04
+  },
+  {
+    "source": "YF",
+    "ticker": "XTP.WA",
+    "price": 101.0
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "OML",
+    "price": 1.33
+  },
+  {
+    "source": "YF",
+    "ticker": "VOT.WA",
+    "price": 28.51
+  },
+  {
+    "source": "YF",
+    "ticker": "AMD",
+    "price": 120.63
+  },
+  {
+    "source": "YF",
+    "ticker": "ZAB.WA",
+    "price": 20.49
+  },
+  {
+    "source": "YF",
+    "ticker": "CRI.WA",
+    "price": 173.0
+  },
+  {
+    "source": "YF",
+    "ticker": "WTN.WA",
+    "price": 21.65
+  },
+  {
+    "source": "YF",
+    "ticker": "GTT.PA",
+    "price": 131.41
+  },
+  {
+    "source": "YF",
+    "ticker": "CNDX.L",
+    "price": 1206.95
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "CMR",
+    "price": 0
+  },
+  {
+    "source": "YF",
+    "ticker": "NNG.WA",
+    "price": 3.23
+  },
+  {
+    "source": "YF",
+    "ticker": "MC.PA",
+    "price": 620.52
+  },
+  {
+    "source": "YF",
+    "ticker": "KLE.WA",
+    "price": 9.52
+  },
+  {
+    "source": "YF",
+    "ticker": "MRB.WA",
+    "price": 11.69
+  },
+  {
+    "source": "YF",
+    "ticker": "VUAA.L",
+    "price": 112.2
+  },
+  {
+    "source": "YF",
+    "ticker": "MBR.WA",
+    "price": 320.19
+  },
+  {
+    "source": "YF",
+    "ticker": "HSY",
+    "price": 163.43
+  },
+  {
+    "source": "YF",
+    "ticker": "GOOGL",
+    "price": 188.81
+  },
+  {
+    "source": "YF",
+    "ticker": "AVGO",
+    "price": 230.34
+  },
+  {
+    "source": "YF",
+    "ticker": "RKLB",
+    "price": 24.96
+  },
+  {
+    "source": "YF",
+    "ticker": "PZU.WA",
+    "price": 43.01
+  },
+  {
+    "source": "YF",
+    "ticker": "STLA",
+    "price": 11.74
+  },
+  {
+    "source": "YF",
+    "ticker": "TQQQ",
+    "price": 39.05
+  },
+  {
+    "source": "YF",
+    "ticker": "ELT.WA",
+    "price": 39.21
+  },
+  {
+    "source": "YF",
+    "ticker": "RBW.WA",
+    "price": 126.13
+  },
+  {
+    "source": "YF",
+    "ticker": "NU",
+    "price": 10.63
+  },
+  {
+    "source": "YF",
+    "ticker": "LPP.WA",
+    "price": 15331.17
+  },
+  {
+    "source": "YF",
+    "ticker": "ASB.WA",
+    "price": 17.85
+  },
+  {
+    "source": "YF",
+    "ticker": "DBC.WA",
+    "price": 77.03
+  },
+  {
+    "source": "YF",
+    "ticker": "7T8.F",
+    "price": 10.08
+  },
+  {
+    "source": "YF",
+    "ticker": "SNT.WA",
+    "price": 201.94
+  },
+  {
+    "source": "YF",
+    "ticker": "INPST.AS",
+    "price": 16.69
+  },
+  {
+    "source": "YF",
+    "ticker": "WM",
+    "price": 198.36
+  },
+  {
+    "source": "YF",
+    "ticker": "BABA",
+    "price": 83.54
+  },
+  {
+    "source": "YF",
+    "ticker": "VRSN",
+    "price": 203.33
+  },
+  {
+    "source": "YF",
+    "ticker": "BDX.WA",
+    "price": 458.02
+  },
+  {
+    "source": "YF",
+    "ticker": "INTC",
+    "price": 20.22
+  },
+  {
+    "source": "YF",
+    "ticker": "CDR.WA",
+    "price": 192.8
+  },
+  {
+    "source": "YF",
+    "ticker": "META",
+    "price": 597.84
+  },
+  {
+    "source": "YF",
+    "ticker": "LTX.WA",
+    "price": 7.16
+  },
+  {
+    "source": "YF",
+    "ticker": "VWCE.AS",
+    "price": 135.41
+  },
+  {
+    "source": "YF",
+    "ticker": "NVDA",
+    "price": 138.27
+  },
+  {
+    "source": "YF",
+    "ticker": "005930.KS",
+    "price": 52526.63
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "EEE",
+    "price": 3.42
+  },
+  {
+    "source": "YF",
+    "ticker": "DIG.WA",
+    "price": 53.73
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "DGE",
+    "price": 19.15
+  },
+  {
+    "source": "YF",
+    "ticker": "AVAV",
+    "price": 156.45
+  },
+  {
+    "source": "YF",
+    "ticker": "BHW.WA",
+    "price": 78.9
+  },
+  {
+    "source": "YF",
+    "ticker": "CBF.WA",
+    "price": 148.2
+  },
+  {
+    "source": "YF",
+    "ticker": "TPE.WA",
+    "price": 3.8
+  },
+  {
+    "source": "YF",
+    "ticker": "ALE.WA",
+    "price": 28.24
+  },
+  {
+    "source": "YF",
+    "ticker": "UBER",
+    "price": 63.17
+  },
+  {
+    "source": "YF",
+    "ticker": "JD",
+    "price": 33.25
+  },
+  {
+    "source": "YF",
+    "ticker": "COG.WA",
+    "price": 6.74
+  },
+  {
+    "source": "YF",
+    "ticker": "GPW.WA",
+    "price": 38.09
+  },
+  {
+    "source": "YF",
+    "ticker": "PXM.WA",
+    "price": 2.16
+  },
+  {
+    "source": "STOOQ",
+    "ticker": "FSG",
+    "price": 11.3
+  },
+  {
+    "source": "YF",
+    "ticker": "BFT.WA",
+    "price": 2900.0
+  },
+  {
+    "source": "YF",
+    "ticker": "KTY.WA",
+    "price": 652.54
+  },
+  {
+    "source": "YF",
+    "ticker": "PKP.WA",
+    "price": 15.6
+  },
+  {
+    "source": "YF",
+    "ticker": "MARA",
+    "price": 17.21
+  },
+  {
+    "source": "YF",
+    "ticker": "XYZ",
+    "price": 86.75
+  },
+  {
+    "source": "YF",
+    "ticker": "KGN.WA",
+    "price": 53.3
+  },
+  {
+    "source": "YF",
+    "ticker": "PKO.WA",
+    "price": 55.26
+  },
+  {
+    "source": "YF",
+    "ticker": "BCS.WA",
+    "price": 12.98
+  },
+  {
+    "source": "YF",
+    "ticker": "FTNT",
+    "price": 94.75
+  },
+  {
+    "source": "YF",
+    "ticker": "TSM",
+    "price": 199.44
+  },
+  {
+    "source": "YF",
+    "ticker": "TMDX",
+    "price": 66.5
+  },
+  {
+    "source": "YF",
+    "ticker": "PKN.WA",
+    "price": 45.9
+  },
+  {
+    "source": "YF",
+    "ticker": "ISAC.L",
+    "price": 88.93
+  },
+  {
+    "source": "YF",
+    "ticker": "PEP",
+    "price": 145.85
+  },
+  {
+    "source": "YF",
+    "ticker": "SOFI",
+    "price": 14.13
+  }
+]
