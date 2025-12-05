@@ -16,7 +16,7 @@ def prepare_static_data():
     prices_df = load_json('prices_start.json')
     return users_df, tickers_df, prices_df
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=28800)
 def yf_yesterday_close(ticker):
     try:
         stock = yf.Ticker(ticker)
@@ -30,7 +30,7 @@ def yf_yesterday_close(ticker):
         print("Nie dziala yf SAD")
         return None
     
-@st.cache_data(ttl=86400)  
+@st.cache_data(ttl=28800)  
 def yf_close_all(tickers):
     prices = {}
     for ticker in tickers:
@@ -38,7 +38,7 @@ def yf_close_all(tickers):
     return prices
     
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=28800)
 def stooq_yesterday_close(ticker):
     """Pojedynczy ticker z Stooq"""
     url = f"https://stooq.pl/q/d/l/?s={ticker}"
@@ -50,7 +50,7 @@ def stooq_yesterday_close(ticker):
         print(f"Nie dziala stooq dla {ticker} SAD")
         return None
 
-@st.cache_data(ttl=86400)
+@st.cache_data(ttl=28800)
 def stooq_close_all(tickers):
     prices = {}
     for ticker in tickers:
@@ -99,3 +99,4 @@ st.markdown(
     unsafe_allow_html=True,
 
 )
+
