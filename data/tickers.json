@@ -1,0 +1,522 @@
+[
+  {
+    "ticker": "HUG",
+    "name": "Huuuge Inc.",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "XTB.WA",
+    "name": "XTB",
+    "source": "YF"
+  },
+  {
+    "ticker": "11B.WA",
+    "name": "11 BIT STUDIOS",
+    "source": "YF"
+  },
+  {
+    "ticker": "DNP.WA",
+    "name": "DINO POLSKA",
+    "source": "YF"
+  },
+  {
+    "ticker": "UBI.PA",
+    "name": "UBISOFT",
+    "source": "YF"
+  },
+  {
+    "ticker": "SUN",
+    "name": "SUNTECH",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "AST",
+    "name": "ASTARTA",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "TXT.WA",
+    "name": "TEXT",
+    "source": "YF"
+  },
+  {
+    "ticker": "TSLA",
+    "name": "TESLA",
+    "source": "YF"
+  },
+  {
+    "ticker": "MUR.WA",
+    "name": "MURAPOL",
+    "source": "YF"
+  },
+  {
+    "ticker": "VLA.PA",
+    "name": "VALNEVA",
+    "source": "YF"
+  },
+  {
+    "ticker": "RGTI",
+    "name": "RIGETTI COMPUTING",
+    "source": "YF"
+  },
+  {
+    "ticker": "AMZN",
+    "name": "AMAZON",
+    "source": "YF"
+  },
+  {
+    "ticker": "PANW",
+    "name": "PALO ALTO NETWORKS",
+    "source": "YF"
+  },
+  {
+    "ticker": "RLEA",
+    "name": "RUBBER LEAF",
+    "source": "YF"
+  },
+  {
+    "ticker": "RPI.L",
+    "name": "RASPBERRY PI HOLDINGS PLC",
+    "source": "YF"
+  },
+  {
+    "ticker": "MNST",
+    "name": "MONSTER",
+    "source": "YF"
+  },
+  {
+    "ticker": "PBX.WA",
+    "name": "POZNAŃSKA KORPORACJA BUDOWLANA PEKABEX",
+    "source": "YF"
+  },
+  {
+    "ticker": "AGO.WA",
+    "name": "AGORA",
+    "source": "YF"
+  },
+  {
+    "ticker": "ENA.WA",
+    "name": "ENEA",
+    "source": "YF"
+  },
+  {
+    "ticker": "GAZP.ME",
+    "name": "GAZPROM",
+    "source": "XDDDDDDD"
+  },
+  {
+    "ticker": "IRDM",
+    "name": "IRIDIUM",
+    "source": "YF"
+  },
+  {
+    "ticker": "NNOX",
+    "name": "NANO-X IMAGING LTD",
+    "source": "YF"
+  },
+  {
+    "ticker": "PLTR",
+    "name": "PALANTIR TECHNOLOGIES",
+    "source": "YF"
+  },
+  {
+    "ticker": "AMB.WA",
+    "name": "AMBRA",
+    "source": "YF"
+  },
+  {
+    "ticker": "KRU.WA",
+    "name": "KRUK",
+    "source": "YF"
+  },
+  {
+    "ticker": "SPOT",
+    "name": "SPOTIFY",
+    "source": "YF"
+  },
+  {
+    "ticker": "LLY",
+    "name": "ELI LILLY AND COMPANY",
+    "source": "YF"
+  },
+  {
+    "ticker": "TTWO",
+    "name": "TAKE-TWO INTERACTIVE",
+    "source": "YF"
+  },
+  {
+    "ticker": "MSFT",
+    "name": "MICROSOFT",
+    "source": "YF"
+  },
+  {
+    "ticker": "PLW.WA",
+    "name": "PLAYWAY",
+    "source": "YF"
+  },
+  {
+    "ticker": "SEK.WA",
+    "name": "SEKO",
+    "source": "YF"
+  },
+  {
+    "ticker": "XTP.WA",
+    "name": "XTPL",
+    "source": "YF"
+  },
+  {
+    "ticker": "OML",
+    "name": "ONE MORE LEVEL",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "VOT.WA",
+    "name": "VOTUM",
+    "source": "YF"
+  },
+  {
+    "ticker": "AMD",
+    "name": "AMD",
+    "source": "YF"
+  },
+  {
+    "ticker": "ZAB.WA",
+    "name": "ZABKA GROUP",
+    "source": "YF"
+  },
+  {
+    "ticker": "CRI.WA",
+    "name": "CREOTECH INSTRUMENTS",
+    "source": "YF"
+  },
+  {
+    "ticker": "WTN.WA",
+    "name": "WITTCHEN",
+    "source": "YF"
+  },
+  {
+    "ticker": "GTT.PA",
+    "name": "GAZTRANSPORT ET TECHNIGAZ",
+    "source": "YF"
+  },
+  {
+    "ticker": "CNDX.L",
+    "name": "ISHARES NASDAQ 100 UCITS ETF USD (ACC)",
+    "source": "YF"
+  },
+  {
+    "ticker": "CMR",
+    "name": "COMARCH",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "NNG.WA",
+    "name": "NANOGROUP",
+    "source": "YF"
+  },
+  {
+    "ticker": "MC.PA",
+    "name": "LVMH",
+    "source": "YF"
+  },
+  {
+    "ticker": "KLE.WA",
+    "name": "KLEPSYDRA",
+    "source": "YF"
+  },
+  {
+    "ticker": "MRB.WA",
+    "name": "MIRBUD",
+    "source": "YF"
+  },
+  {
+    "ticker": "VUAA.L",
+    "name": "VANGUARD S&P 500 UCITS ETF USD ACC",
+    "source": "YF"
+  },
+  {
+    "ticker": "MBR.WA",
+    "name": "MO-BRUK",
+    "source": "YF"
+  },
+  {
+    "ticker": "HSY",
+    "name": "THE HERSHEY",
+    "source": "YF"
+  },
+  {
+    "ticker": "GOOGL",
+    "name": "ALPHABET",
+    "source": "YF"
+  },
+  {
+    "ticker": "AVGO",
+    "name": "BROADCOM",
+    "source": "YF"
+  },
+  {
+    "ticker": "RKLB",
+    "name": "ROCKET LAB USA",
+    "source": "YF"
+  },
+  {
+    "ticker": "PZU.WA",
+    "name": "POWSZECHNY ZAKŁAD UBEZPIECZEŃ",
+    "source": "YF"
+  },
+  {
+    "ticker": "STLA",
+    "name": "STELLANTIS",
+    "source": "YF"
+  },
+  {
+    "ticker": "TQQQ",
+    "name": "PROSHARES ULTRAPRO QQQ",
+    "source": "YF"
+  },
+  {
+    "ticker": "ELT.WA",
+    "name": "ELEKTROTIM",
+    "source": "YF"
+  },
+  {
+    "ticker": "RBW.WA",
+    "name": "RAINBOW TOURS",
+    "source": "YF"
+  },
+  {
+    "ticker": "NU",
+    "name": "NU HOLDINGS",
+    "source": "YF"
+  },
+  {
+    "ticker": "LPP.WA",
+    "name": "LPP",
+    "source": "YF"
+  },
+  {
+    "ticker": "ASB.WA",
+    "name": "ASBIS",
+    "source": "YF"
+  },
+  {
+    "ticker": "DBC.WA",
+    "name": "DĘBICA",
+    "source": "YF"
+  },
+  {
+    "ticker": "7T8.F",
+    "name": "ASSECO SEE",
+    "source": "YF"
+  },
+  {
+    "ticker": "SNT.WA",
+    "name": "SYNEKTIK",
+    "source": "YF"
+  },
+  {
+    "ticker": "INPST.AS",
+    "name": "INPOST",
+    "source": "YF"
+  },
+  {
+    "ticker": "WM",
+    "name": "WASTE MANAGEMENT",
+    "source": "YF"
+  },
+  {
+    "ticker": "BABA",
+    "name": "ALIBABA GROUP",
+    "source": "YF"
+  },
+  {
+    "ticker": "VRSN",
+    "name": "VERISIGN",
+    "source": "YF"
+  },
+  {
+    "ticker": "BDX.WA",
+    "name": "BUDIMEX",
+    "source": "YF"
+  },
+  {
+    "ticker": "INTC",
+    "name": "INTEL",
+    "source": "YF"
+  },
+  {
+    "ticker": "CDR.WA",
+    "name": "CD PROJECT",
+    "source": "YF"
+  },
+  {
+    "ticker": "META",
+    "name": "META",
+    "source": "YF"
+  },
+  {
+    "ticker": "LTX.WA",
+    "name": "LENTEX",
+    "source": "YF"
+  },
+  {
+    "ticker": "VWCE.AS",
+    "name": "VANGUARD FTSE ALL-WORLD UCITS ETF USD ACC",
+    "source": "YF"
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA",
+    "source": "YF"
+  },
+  {
+    "ticker": "005930.KS",
+    "name": "SAMSUNG",
+    "source": "YF"
+  },
+  {
+    "ticker": "EEE",
+    "name": "EKIPA",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "DIG.WA",
+    "name": "DIGITAL NETWORK",
+    "source": "YF"
+  },
+  {
+    "ticker": "DGE",
+    "name": "DRAGO ENTERTAINMENT",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "AVAV",
+    "name": "AEROVIRONMENT, INC.",
+    "source": "YF"
+  },
+  {
+    "ticker": "BHW.WA",
+    "name": "BANK HANDLOWY W WARSZAWIE",
+    "source": "YF"
+  },
+  {
+    "ticker": "CBF.WA",
+    "name": "CYBER_FOLKS",
+    "source": "YF"
+  },
+  {
+    "ticker": "TPE.WA",
+    "name": "TAURON POLSKA ENERGIA",
+    "source": "YF"
+  },
+  {
+    "ticker": "ALE.WA",
+    "name": "ALLEGRO",
+    "source": "YF"
+  },
+  {
+    "ticker": "UBER",
+    "name": "UBER",
+    "source": "YF"
+  },
+  {
+    "ticker": "JD",
+    "name": "JD.COM",
+    "source": "YF"
+  },
+  {
+    "ticker": "COG.WA",
+    "name": "COGNOR",
+    "source": "YF"
+  },
+  {
+    "ticker": "GPW.WA",
+    "name": "GIEŁDA PAPIERÓW WARTOŚCIOWYCH",
+    "source": "YF"
+  },
+  {
+    "ticker": "PXM.WA",
+    "name": "POLIMEX MOSTOSTAL",
+    "source": "YF"
+  },
+  {
+    "ticker": "FSG",
+    "name": "FABRYKI SPRZĘTU I NARZĘDZI GÓRNICZYCH GRUPA KAPITAŁOWA FASING",
+    "source": "STOOQ"
+  },
+  {
+    "ticker": "BFT.WA",
+    "name": "BENEFIT SYSTEMS",
+    "source": "YF"
+  },
+  {
+    "ticker": "KTY.WA",
+    "name": "GRUPA KĘTY",
+    "source": "YF"
+  },
+  {
+    "ticker": "PKP.WA",
+    "name": "PKP CARGO",
+    "source": "YF"
+  },
+  {
+    "ticker": "MARA",
+    "name": "MARA HOLDINGS",
+    "source": "YF"
+  },
+  {
+    "ticker": "XYZ",
+    "name": "BLOCK",
+    "source": "YF"
+  },
+  {
+    "ticker": "KGN.WA",
+    "name": "ZESPÓŁ ELEKTROCIEPŁOWNI WROCŁAWSKICH KOGENERACJA",
+    "source": "YF"
+  },
+  {
+    "ticker": "PKO.WA",
+    "name": "POWSZECHNA KASA OSZCZĘDNOŚCI BANK POLSKI",
+    "source": "YF"
+  },
+  {
+    "ticker": "BCS.WA",
+    "name": "BIG CHEESE STUDIO",
+    "source": "YF"
+  },
+  {
+    "ticker": "FTNT",
+    "name": "FORTINET",
+    "source": "YF"
+  },
+  {
+    "ticker": "TSM",
+    "name": "TSMC",
+    "source": "YF"
+  },
+  {
+    "ticker": "TMDX",
+    "name": "TRANSMEDICS GROUP, INC.",
+    "source": "YF"
+  },
+  {
+    "ticker": "PKN.WA",
+    "name": "ORLEN",
+    "source": "YF"
+  },
+  {
+    "ticker": "ISAC.L",
+    "name": "ISHARES MSCI ACWI UCITS ETF USD",
+    "source": "YF"
+  },
+  {
+    "ticker": "PEP",
+    "name": "PEPSI",
+    "source": "YF"
+  },
+  {
+    "ticker": "SOFI",
+    "name": "SOFI TECHNOLOGIES",
+    "source": "YF"
+  }
+]
