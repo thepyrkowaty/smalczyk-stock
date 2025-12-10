@@ -424,35 +424,5 @@
     "Stock1": "UBER",
     "Stock2": "TRANSMEDICS GROUP, INC.",
     "Stock3": "FORTINET"
-  },
-  {
-    "Username": "tomm01__",
-    "Stock1": "PEPSI",
-    "Stock2": "SAMSUNG",
-    "Stock3": "VERISIGN"
-  },
-  {
-    "Username": "Vemu",
-    "Stock1": "AMD",
-    "Stock2": "TSMC",
-    "Stock3": "UBISOFT"
-  },
-  {
-    "Username": "iKizu",
-    "Stock1": "DINO POLSKA",
-    "Stock2": "POLIMEX MOSTOSTAL",
-    "Stock3": "XTB"
-  },
-  {
-    "Username": "WlaZiek",
-    "Stock1": "SYNEKTIK",
-    "Stock2": "BENEFIT SYSTEMS",
-    "Stock3": "RASPBERRY PI HOLDINGS PLC"
-  },
-  {
-    "Username": "bartek",
-    "Stock1": "ORLEN",
-    "Stock2": "CREOTECH INSTRUMENTS",
-    "Stock3": "ROCKET LAB USA"
   }
 ]
