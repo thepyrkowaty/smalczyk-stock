@@ -34,7 +34,22 @@ class Frontend:
 
         self.page.markdown(img_to_html("data/delord.gif"), unsafe_allow_html=True)
 
-    def run_frontend(self, user_ranking, prices):
+    @staticmethod
+    def benchmark_styler(benchmark, column):
+        def color(val):
+            if val >= benchmark:
+                return "background-color: OliveDrab; color: black; font-weight: bold"
+            else:
+                return "background-color: red; color: black; font-weight: bold"
+        def apply(df):
+            colored = df.style.map(color, subset=[column])
+            formatted = colored.format(precision=2)
+            return formatted
+        
+        return apply
+        
+
+    def run_frontend(self, user_ranking, prices, sp500_benchmark):
         self.page.empty()
         st.set_page_config(page_title="Ranking giełdowy", layout="wide")
         st.title("📈 Ranking Giełdowy - Paweł Delord Szabla*")
@@ -43,8 +58,12 @@ class Frontend:
             "<span style='font-size: 18px; color: red;'>#bajka #zabawa #gra</span>",
             unsafe_allow_html=True,
         )
+        st.subheader("SP500 Benchmark")
+        st.dataframe(sp500_benchmark, hide_index=True, width='content')
+        styler = Frontend.benchmark_styler(sp500_benchmark.at[0, 'Zmiana procentowa'], 'Średnia')
         st.subheader("👥 Wybory Użytkowników")
-        st.dataframe(user_ranking, width="stretch")
+        st.dataframe(styler(user_ranking), width="stretch")
+        # st.dataframe(user_ranking.style.applymap(color_val, subset=["Średnia"]), width="stretch")
         st.subheader("💰 Ceny Początkowe Spółek")
         st.dataframe(prices, width="stretch")
         st.markdown(
