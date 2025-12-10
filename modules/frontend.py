@@ -41,13 +41,13 @@ class Frontend:
                 return "background-color: OliveDrab; color: black; font-weight: bold"
             else:
                 return "background-color: red; color: black; font-weight: bold"
+
         def apply(df):
             colored = df.style.map(color, subset=[column])
             formatted = colored.format(precision=2)
             return formatted
-        
+
         return apply
-        
 
     def run_frontend(self, user_ranking, prices, sp500_benchmark):
         self.page.empty()
@@ -59,8 +59,10 @@ class Frontend:
             unsafe_allow_html=True,
         )
         st.subheader("SP500 Benchmark")
-        st.dataframe(sp500_benchmark, hide_index=True, width='content')
-        styler = Frontend.benchmark_styler(sp500_benchmark.at[0, 'Zmiana procentowa'], 'Średnia')
+        st.dataframe(sp500_benchmark, hide_index=True, width="content")
+        styler = Frontend.benchmark_styler(
+            sp500_benchmark.at[0, "Zmiana procentowa"], "Średnia"
+        )
         st.subheader("👥 Wybory Użytkowników")
         st.dataframe(styler(user_ranking), width="stretch")
         # st.dataframe(user_ranking.style.applymap(color_val, subset=["Średnia"]), width="stretch")
