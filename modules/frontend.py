@@ -60,32 +60,42 @@ class Frontend:
 
     def run_frontend(self, user_ranking, prices, sp500_benchmark):
         self.page.empty()
-        st.set_page_config(page_title="Ranking giełdowy", layout="wide")
-        st.title("📈 Ranking Giełdowy - Paweł Delord Szabla 2025*")
-        st.markdown("**Witaj w rankingu inwestycyjnym!**")
-        st.markdown(
-            "<span style='font-size: 18px; color: red;'>#bajka #zabawa #gra</span>",
-            unsafe_allow_html=True,
-        )
-        st.subheader("SP500 Benchmark")
-        styler = Frontend.df_styler(percent_column=["Zmiana procentowa"])
-        st.dataframe(styler(sp500_benchmark), hide_index=True, width="content")
-        styler = Frontend.df_styler(
-            benchmark=sp500_benchmark.at[0, "Zmiana procentowa"],
-            color_column="Średnia",
-            percent_column=[
-                "Wynik spółka 1",
-                "Wynik spółka 2",
-                "Wynik spółka 3",
-                "Średnia",
-            ],
-        )
-        st.subheader("👥 Wybory Użytkowników")
-        st.dataframe(styler(user_ranking), width="stretch")
-        st.subheader("💰 Kursy Początkowe Spółek")
-        styler = Frontend.df_styler(percent_column=["Zmiana procentowa"])
-        st.dataframe(styler(prices), width="stretch")
-        st.markdown(
-            "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
-            unsafe_allow_html=True,
-        )
+        tab1, tab2 = st.tabs(["Ranking", "Ranking wybranych spółek"])
+        with tab1:
+
+            st.set_page_config(page_title="Ranking giełdowy", layout="wide")
+            st.title("📈 Ranking Giełdowy - Paweł Delord Szabla 2025*")
+            st.markdown(
+                "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>",
+                unsafe_allow_html=True,
+            )
+            st.subheader("SP500 Benchmark")
+            styler = Frontend.df_styler(percent_column=["Zmiana procentowa"])
+            st.dataframe(styler(sp500_benchmark), hide_index=True, width="content")
+            styler = Frontend.df_styler(
+                benchmark=sp500_benchmark.at[0, "Zmiana procentowa"],
+                color_column="Średnia",
+                percent_column=[
+                    "Wynik spółka 1",
+                    "Wynik spółka 2",
+                    "Wynik spółka 3",
+                    "Średnia",
+                ],
+            )
+            st.subheader("👥 Wybory Użytkowników")
+            st.dataframe(styler(user_ranking), width="stretch", height=560)
+            st.markdown(
+                "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
+                unsafe_allow_html=True,
+            )
+        with tab2:
+            st.subheader("💰 Kursy Początkowe Spółek")
+            st.markdown(
+                "**Tutaj są wszystkie spółki wybrane przez użytkowników w ankiecie**"
+            )
+            styler = Frontend.df_styler(percent_column=["Zmiana procentowa"])
+            st.dataframe(styler(prices), width="stretch", height=805)
+            st.markdown(
+                "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
+                unsafe_allow_html=True,
+            )
