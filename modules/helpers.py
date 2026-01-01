@@ -37,26 +37,37 @@ class YahooData:
 
     @staticmethod
     @st.cache_data(ttl=28800)
-    def __yf_yesterday_close(ticker):
-        try:
-            stock = yf.Ticker(ticker)
-            hist = stock.history(period="5d")
-            if hist.empty:
-                return None
-
-            return round(float(hist["Close"].iloc[-1]), 2)
-
-        except Exception:
-            raise Exception(f"Nie dziala yf dla {ticker} SAD")
-
-    @staticmethod
     def get_yf_prices(tickers):
-        return pd.DataFrame(
-            {
-                ticker: YahooData.__yf_yesterday_close(ticker) for ticker in tickers
-            }.items(),
-            columns=["ticker", "price_now"],
-        )
+        try:
+            data = yf.download(
+                tickers=tickers,
+                period="5d",
+                interval="1d",
+                group_by="column",
+                progress=False,
+                auto_adjust=True,
+            )
+
+            if data is None or data.empty:
+                return pd.DataFrame(columns=["ticker", "price_now"])
+
+            close_prices = data["Close"]
+
+            if len(close_prices) >= 2:
+                result = close_prices.iloc[-2]
+            else:
+                result = close_prices.iloc[-1]
+
+            result = result.round(2).reset_index()
+            result.columns = ["ticker", "price_now"]
+            return result
+
+        except Exception as e:
+            # Logujemy błąd, ale nie pozwalamy aplikacji "wywalić się"
+            st.warning(
+                f"Nie udało się pobrać danych z Yahoo Finance, spróbuj za jakiś czas: {e}"
+            )
+            return pd.DataFrame(columns=["ticker", "price_now"])
 
 
 class StooqData:
