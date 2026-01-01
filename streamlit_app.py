@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from modules.helpers import DataLoader, YahooData, StooqData
+from modules.helpers import DataLoader, YahooData, StooqData, Static2025Data
 from modules.backend import Backend
 from modules.frontend import Frontend
 
@@ -27,8 +27,6 @@ frontend.waiting_screen()
 
 # prices, ranking, sp500_benchmark = backend.get_prices_and_ranking()
 
-ranking = pd.read_csv(r"data\2025\2025.csv")
-sp500_benchmark = pd.read_csv(r"data\2025\sp500.csv")
-
+ranking, sp500_benchmark = Static2025Data.get_2025_data()
 
 frontend.run_frontend(ranking, sp500_benchmark)

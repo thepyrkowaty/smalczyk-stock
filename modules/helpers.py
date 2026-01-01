@@ -97,3 +97,15 @@ class StooqData:
             }.items(),
             columns=["ticker", "price_now"],
         )
+
+
+class Static2025Data:
+    def __init__(self) -> None:
+        pass
+
+    @staticmethod
+    @st.cache_data()
+    def get_2025_data():
+        ranking = pd.read_csv(r"data/2025/2025.csv")
+        sp500_benchmark = pd.read_csv(r"data/2025/sp500.csv")
+        return ranking, sp500_benchmark
