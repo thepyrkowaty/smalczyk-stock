@@ -106,6 +106,6 @@ class Static2025Data:
     @staticmethod
     @st.cache_data()
     def get_2025_data():
-        ranking = pd.read_csv(r"data/2025/2025.csv")
+        ranking = pd.read_csv(r"data/2025/2025.csv", index_col=[0])
         sp500_benchmark = pd.read_csv(r"data/2025/sp500.csv")
         return ranking, sp500_benchmark
