@@ -1,73 +1,79 @@
 import pandas as pd
+import numpy as np
 
 
 class Backend:
-    def __init__(
-        self, tickers, start_prices, current_prices, users, sp500_benchmark
-    ) -> None:
-        self.__tickers = tickers
+    def __init__(self, sp500_benchmark, start_prices, current_prices, ranking) -> None:
+        self.__sp500_benchmark = sp500_benchmark
         self.__start_prices = start_prices
         self.__current_prices = current_prices
-        self.__users = users
-        self.__sp500_benchmark = sp500_benchmark
-
-    def __get_prices_stats(self):
-        all_prices = self.__tickers.merge(self.__start_prices, on="ticker").merge(
-            self.__current_prices, on="ticker", how="left"
-        )[["ticker", "name", "price", "price_now"]]
-        all_prices = all_prices.fillna(0)
-        all_prices = all_prices.rename(
-            columns={"price": "2025-01-02", "price_now": "yesterday"}
-        )
-        all_prices["diff"] = round(
+        self.__ranking = ranking
+        self.__stats = pd.merge(
+            self.__start_prices, self.__current_prices, how="left", on="ticker"
+        )[["name", "ticker", "start_price", "price_now"]]
+        self.__stats["diff"] = round(
             100
-            * (all_prices["yesterday"] - all_prices["2025-01-02"])
-            / (all_prices["2025-01-02"] + 1e-6),
+            * (self.__stats["price_now"] - self.__stats["start_price"])
+            / (self.__stats["start_price"] + 1e-20),
             2,
         )
-        all_prices = all_prices.rename(
-            columns={
-                "name": "Spółka",
-                "yesterday": "Wczoraj",
-                "diff": "Zmiana procentowa",
-            }
-        )[["Spółka", "2025-01-02", "Wczoraj", "Zmiana procentowa"]]
-        return all_prices.sort_values(
-            by="Zmiana procentowa", ascending=False
-        ).reset_index(drop=True)
-
-    def __get_users_stats(self, prices, users):
-        name_to_diff = dict(zip(prices["Spółka"], prices["Zmiana procentowa"]))
-        ranking = users.copy()
-        ranking["Wynik spółka 1"] = ranking["Spółka 1"].map(name_to_diff)
-        ranking["Wynik spółka 2"] = ranking["Spółka 2"].map(name_to_diff)
-        ranking["Wynik spółka 3"] = ranking["Spółka 3"].map(name_to_diff)
-        ranking["Średnia"] = round(
-            (
-                ranking["Wynik spółka 1"]
-                + ranking["Wynik spółka 2"]
-                + ranking["Wynik spółka 3"]
-            )
-            / 3,
-            2,
-        )
-        ranking = ranking.sort_values(by="Średnia", ascending=False).reset_index(
-            drop=True
-        )
-        ranking.index += 1
-        return ranking
+        self.__ticker_map = self.__stats.set_index("ticker")["diff"].to_dict()
+        self.__name_map = self.__stats.set_index("name")["diff"].to_dict()
+        self.__values_to_fill = {
+            "Wynik Świat": 0,
+            "Wynik Surowiec": 0,
+            "Wynik Krypto": 0,
+            "Wynik Polska": 0,
+            "Wynik Usa": 0,
+            "Surowiec": "BRAK",
+            "Krypto": "BRAK",
+            "Spółka Świat": "BRAK",
+            "Spółka Usa": "BRAK",
+        }
 
     def __get_sp500_benchmark_stats(self):
         df = self.__sp500_benchmark.copy()
-        df["2025-01-02"] = 5868.54
+        df["2025-12-31"] = 6845.5
         df = df.rename(columns={"price_now": "Wczoraj"})
-        df["Zmiana procentowa"] = round(
-            100 * (df["Wczoraj"] - df["2025-01-02"]) / (df["2025-01-02"] + 1e-6), 2
+        df["Wynik"] = round(
+            100 * (df["Wczoraj"] - df["2025-12-31"]) / (df["2025-12-31"] + 1e-6), 2
         )
-        return df[["2025-01-02", "Wczoraj", "Zmiana procentowa"]]
+        return df[["2025-12-31", "Wczoraj", "Wynik"]]
+
+    def get_ranking(self):
+        self.__ranking["Wynik Świat"] = self.__ranking["Ticker Świat"].map(
+            self.__ticker_map
+        )
+        self.__ranking["Wynik Usa"] = self.__ranking["Ticker Usa"].map(
+            self.__ticker_map
+        )
+        self.__ranking["Wynik Surowiec"] = self.__ranking["Surowiec"].map(
+            self.__name_map
+        )
+        self.__ranking["Wynik Krypto"] = self.__ranking["Krypto"].map(self.__name_map)
+        self.__ranking["Wynik Polska"] = self.__ranking["Spółka Polska"].map(
+            self.__name_map
+        )
+        self.__ranking["Wynik Usa"] = np.where(
+            self.__ranking["Czy Usa"] == 0, 0, self.__ranking["Wynik Usa"]
+        )
+        self.__ranking["Wynik Świat"] = np.where(
+            self.__ranking["Czy Świat"] == 0, 0, self.__ranking["Wynik Świat"]
+        )
+        self.__ranking["Średnia"] = (
+            self.__ranking["Wynik Polska"] * 0.25
+            + self.__ranking["Wynik Świat"] * 0.25
+            + self.__ranking["Wynik Usa"] * 0.25
+            + self.__ranking["Wynik Surowiec"] * 0.15
+            + self.__ranking["Wynik Krypto"] * 0.10
+        )
+
+        return (
+            self.__ranking.fillna(self.__values_to_fill)
+            .sort_values(by="Średnia", ascending=False)
+            .reset_index(drop=True)
+        )
 
     def get_prices_and_ranking(self):
-        prices = self.__get_prices_stats()
-        ranking = self.__get_users_stats(prices, self.__users)
         sp500_benchmark = self.__get_sp500_benchmark_stats()
-        return prices, ranking, sp500_benchmark
+        return sp500_benchmark

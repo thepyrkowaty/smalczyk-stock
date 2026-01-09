@@ -10,25 +10,18 @@ class DataLoader:
         pass
 
     @staticmethod
-    def __load_json(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return pd.json_normalize(data)
-
-    @staticmethod
     @st.cache_data
     def prepare_static_data():
-        users_df = DataLoader.__load_json("data/users_picks.json").rename(
-            columns={
-                "Username": "Użytkownik",
-                "Stock1": "Spółka 1",
-                "Stock2": "Spółka 2",
-                "Stock3": "Spółka 3",
-            }
-        )
-        tickers_df = DataLoader.__load_json("data/tickers.json")
-        prices_df = DataLoader.__load_json("data/prices_start.json")
-        return users_df, tickers_df, prices_df
+        stock_poland = pd.read_csv("data/2026/start_prices_pl.csv")
+        stock_crypto = pd.read_csv("data/2026/start_prices_crypto.csv")
+        stock_commodities = pd.read_csv("data/2026/start_prices_commodities.csv")
+        stock_world = pd.read_csv("data/2026/start_prices_world.csv")
+        stock_usa = pd.read_csv("data/2026/start_prices_usa.csv")
+        df = pd.read_csv("data/2026/2026.csv", usecols=lambda column: column not in ["Czas", "Community"])
+        
+        return df, pd.concat(
+            [stock_poland, stock_usa, stock_world, stock_crypto, stock_commodities]
+        ).reset_index(drop=True)
 
 
 class YahooData:
@@ -39,11 +32,11 @@ class YahooData:
     @st.cache_data(ttl=28800)
     def get_yf_prices(tickers):
         try:
+            # 1. Pobieramy dane (period 7d daje zapas na polskie święta/weekendy)
             data = yf.download(
                 tickers=tickers,
-                period="5d",
+                period="7d",
                 interval="1d",
-                group_by="column",
                 progress=False,
                 auto_adjust=True,
             )
@@ -52,21 +45,27 @@ class YahooData:
                 return pd.DataFrame(columns=["ticker", "price_now"])
 
             close_prices = data["Close"]
+            filled_data = close_prices.ffill().bfill()
 
-            if len(close_prices) >= 2:
-                result = close_prices.iloc[-2]
+            last_row = filled_data.iloc[-1]
+
+            if isinstance(last_row, pd.Series):
+                result = last_row.reset_index()
+                result.columns = ["ticker", "price_now"]
             else:
-                result = close_prices.iloc[-1]
+                result = pd.DataFrame(
+                    {
+                        "ticker": [tickers if isinstance(tickers, str) else tickers[0]],
+                        "price_now": [last_row],
+                    }
+                )
 
-            result = result.round(2).reset_index()
-            result.columns = ["ticker", "price_now"]
+            result["price_now"] = result["price_now"].round(10)
+
             return result
 
         except Exception as e:
-            # Logujemy błąd, ale nie pozwalamy aplikacji "wywalić się"
-            st.warning(
-                f"Nie udało się pobrać danych z Yahoo Finance, spróbuj za jakiś czas: {e}"
-            )
+            print(f"Błąd pobierania danych: {e}")
             return pd.DataFrame(columns=["ticker", "price_now"])
 
 

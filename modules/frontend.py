@@ -1,11 +1,68 @@
 import streamlit as st
 import base64
 from pathlib import Path
+import pandas as pd
 
 
 class Frontend:
     def __init__(self) -> None:
         self.page = st.empty()
+        with open("data/disclaimer.html", "r", encoding="utf-8") as f:
+            self.__disclaimer = f.read()
+        self.__cols = [
+            "Użytkownik",
+            "Spółka Polska",
+            "Wynik Polska",
+            "Spółka Usa",
+            "Wynik Usa",
+            "Spółka Świat",
+            "Wynik Świat",
+            "Surowiec",
+            "Wynik Surowiec",
+            "Krypto",
+            "Wynik Krypto",
+            "Średnia",
+            "Czy Usa",
+            "Czy Świat",
+            "Ticker Usa",
+            "Ticker Świat",
+            "Czy Streamer",
+        ]
+
+        self.__config = {
+            # 1. KOLUMNY SZTYWNE (Zawsze zajmują tyle samo miejsca, niezależnie od monitora)
+            "Wynik Polska": st.column_config.NumberColumn(
+                "Wynik Polska", width=30, format="%.2f%%"
+            ),
+            "Wynik Usa": st.column_config.NumberColumn(
+                "Wynik Usa", width=30, format="%.2f%%"
+            ),
+            "Wynik Świat": st.column_config.NumberColumn(
+                "Wynik Świat", width=30, format="%.2f%%"
+            ),
+            "Wynik Surowiec": st.column_config.NumberColumn(
+                "Wynik Surowiec", width=30, format="%.2f%%"
+            ),
+            "Wynik Krypto": st.column_config.NumberColumn(
+                "Wynik Krypto", width=30, format="%.2f%%"
+            ),
+            "Średnia": st.column_config.NumberColumn(
+                "Średnia", width=30, format="%.2f%%"
+            ),
+            # 2. KOLUMNY ELASTYCZNE (Dostosują się do wolnego miejsca)
+            # Nie podajemy 'width' w pikselach, tylko opcjonalnie "medium" lub nic
+            "Użytkownik": st.column_config.TextColumn("Użytkownik", width="small"),
+            "Spółka Polska": st.column_config.TextColumn("Spółka Polska"),
+            "Spółka Świat": st.column_config.TextColumn("Spółka Świat"),
+            "Surowiec": st.column_config.TextColumn("Surowiec"),
+            "Krypto": st.column_config.TextColumn("Krypto"),
+            # 3. UKRYTE
+            "Czy Usa": None,
+            "Czy Świat": None,
+            "Ticker Usa": None,
+            "Ticker Świat": None,
+            "Czy Streamer": None,
+        }
 
     @staticmethod
     def img_to_bytes(img_path):
@@ -40,10 +97,9 @@ class Frontend:
         )
 
     @staticmethod
-    def df_styler(benchmark=None, color_column=None, percent_column=None):
+    def styler_2025(benchmark=None, color_column=None, percent_column=None):
         def apply(df):
             styled = df.style
-
             if percent_column is not None:
                 styled = styled.format(
                     {c: "{:.2f}%" for c in percent_column}, precision=2
@@ -63,11 +119,74 @@ class Frontend:
 
         return apply
 
-    def run_frontend(self, user_ranking, sp500_benchmark):
+    @staticmethod
+    def styler_2026(row, benchmark):
+        style = pd.Series("", index=row.index)
+
+        if row["Czy Streamer"] == 1:
+            style["Użytkownik"] = "background-color: yellow; color: black;"
+
+        if row["Czy Usa"] == 0:
+            style["Spółka Usa"] = "background-color: #FFF0F0; color: #884444;"
+            style["Wynik Usa"] = "background-color: #FFF0F0; color: #884444;"
+
+        if row["Czy Świat"] == 0:
+            style["Spółka Świat"] = "background-color: #FFF0F0; color: #884444;"
+            style["Wynik Świat"] = "background-color: #FFF0F0; color: #884444;"
+
+        if row["Średnia"] < 0:
+            style["Średnia"] = "background-color: red; color: black; font-weight: bold"
+        elif 0 <= row["Średnia"] < benchmark:
+            style["Średnia"] = (
+                "background-color: orange; color: black; font-weight: bold"
+            )
+        else:
+            style["Średnia"] = (
+                "background-color: OliveDrab; color: black; font-weight: bold"
+            )
+
+        return style
+
+    def run_frontend(self, ranking_2025, sp500_2025, ranking_2026, sp500_2026):
         self.page.empty()
-        tab1, tab2 = st.tabs(["Ranking 2025", "Ranking 2026"])
+        tab1, tab2, tab3 = st.tabs(["Disclaimer", "Ranking 2026", "Ranking 2025"])
 
         with tab1:
+            st.markdown(self.__disclaimer, unsafe_allow_html=True)
+
+        with tab2:
+            st.set_page_config(page_title="Ranking giełdowy", layout="wide")
+            st.title("📈 Ranking Giełdowy - Paweł Delord Szabla 2026")
+            st.markdown(
+                "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>",
+                unsafe_allow_html=True,
+            )
+            st.subheader("SP500 Benchmark")
+            styler = Frontend.styler_2025(percent_column=["Wynik"])
+            st.dataframe(
+                styler(sp500_2026),
+                hide_index=True,
+                width="content",
+                column_config={"Wynik": "Zmiana Procentowa"},
+            )
+            ranking_2026 = ranking_2026[
+                [c for c in self.__cols if c in ranking_2026.columns]
+            ]
+            styled = ranking_2026.style.apply(
+                Frontend.styler_2026,
+                axis=1,
+                benchmark=sp500_2026["Wynik"].iloc[0],
+            ).format(
+                {
+                    c: "{:.2f}%"
+                    for c in ranking_2026.select_dtypes(include=["number"]).columns
+                },
+                precision=2,
+            )
+
+            st.dataframe(styled, height=560, column_config=self.__config)
+
+        with tab3:
             st.set_page_config(page_title="Ranking giełdowy", layout="wide")
             st.title(
                 "📈 Ranking Giełdowy - Paweł Delord Szabla 2025 - oficjalne wyniki bo koniec roku*"
@@ -77,10 +196,10 @@ class Frontend:
                 unsafe_allow_html=True,
             )
             st.subheader("SP500 Benchmark")
-            styler = Frontend.df_styler(percent_column=["Zmiana procentowa"])
-            st.dataframe(styler(sp500_benchmark), hide_index=True, width="content")
-            styler = Frontend.df_styler(
-                benchmark=sp500_benchmark.at[0, "Zmiana procentowa"],
+            styler = Frontend.styler_2025(percent_column=["Zmiana procentowa"])
+            st.dataframe(styler(sp500_2025), hide_index=True, width="content")
+            styler = Frontend.styler_2025(
+                benchmark=sp500_2025.at[0, "Zmiana procentowa"],
                 color_column="Średnia",
                 percent_column=[
                     "Wynik spółka 1",
@@ -90,50 +209,8 @@ class Frontend:
                 ],
             )
             st.subheader("👥 Wybory Użytkowników")
-            st.dataframe(styler(user_ranking), width="stretch", height=560)
+            st.dataframe(styler(ranking_2025), width="stretch", height=560)
             st.markdown(
                 "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
                 unsafe_allow_html=True,
-            )
-        with tab2:
-            st.title(
-                "Pomóż mi w moim projekcie edukacyjnym i wypełnij ankietę w forms dostępną na Discord @delordione w przypiętej wiadomości lub na czacie na Kicku."
-            )
-            st.markdown(
-                "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>",
-                unsafe_allow_html=True,
-            )
-            st.markdown(
-                "<span style='font-size: 20px; color: green;'>**ŻYCZE ZDRÓWKA I DUŻO SZCZĘŚCIA W 2026 ROKU**</span>",
-                unsafe_allow_html=True,
-            )
-            st.markdown(
-                Frontend.img_to_html("data/love.gif", "BUZIAKI", "20vh"),
-                unsafe_allow_html=True,
-            )
-
-            disclaimer = """
-                ***NOTYFIKACJA ORAZ ZASTRZEŻENIA PRAWNE***
-                
-                NINIEJSZA PLATFORMA MA CHARAKTER WYŁĄCZNIE EDUKACYJNY, DYDAKTYCZNY ORAZ NAUKOWO-BADAWCZY. 
-                Wszelkie treści, dane, wykresy, analizy oraz kody źródłowe prezentowane w obrębie niniejszej witryny zostały wygenerowane i udostępnione w jednym, nadrzędnym celu: nauki obsługi struktur danych, testowania algorytmów przetwarzania informacji oraz doskonalenia umiejętności programistycznych w zakresie tworzenia nowoczesnych interfejsów webowych. 
-                
-                **To nie jest porada inwestycyjna:** Żadna informacja, słowo, liczba, kropka czy przecinek znajdujący się na tej stronie nie stanowi, nie zastępuje i nie może być interpretowany jako rekomendacja inwestycyjna, porada finansowa, oferta kupna lub sprzedaży jakichkolwiek instrumentów finansowych w rozumieniu Rozporządzenia Parlamentu Europejskiego i Rady (UE) nr 596/2014 oraz innych właściwych przepisów prawa finansowego. 
-                
-                **Prezentacja faktów historycznych:** Serwis służy wyłącznie do wizualizacji realnych, historycznych zmian kursów spółek giełdowych. Prezentujemy surowe fakty rynkowe, które miały miejsce w przeszłości. Pamiętaj: wyniki osiągnięte w przeszłości nie stanowią żadnej gwarancji ani obietnicy zysków w przyszłości. 
-                
-                **Brak odpowiedzialności:** Twórcy witryny nie ponoszą żadnej odpowiedzialności (cywilnej, karnej ani moralnej) za jakiekolwiek decyzje finansowe, straty, szkody (bezpośrednie lub wtórne) wynikające z interpretacji danych zawartych w serwisie. Inwestowanie na rynkach kapitałowych wiąże się z wysokim ryzykiem utraty całości kapitału. 
-                
-                **Charakter symulacyjny:** Elementy interaktywne są formą ćwiczenia z zakresu Data Science i Frontend Developmentu. Wykorzystanie ich do jakichkolwiek celów komercyjnych lub spekulacyjnych odbywa się na wyłączną odpowiedzialność użytkownika. 
-                
-                **Pamiętaj o własnym rozumie:** Zanim podejmiesz jakąkolwiek decyzję finansową, skonsultuj się z licencjonowanym doradcą inwestycyjnym. My tutaj tylko uczymy się, jak sprawić, żeby wykres wyglądał ładnie w Pythonie i HTML-u. 
-
-                ---
-                *KORZYSTAJĄC Z TEJ STRONY, POTWIERDZASZ, ŻE ROZUMIESZ POWYŻSZE ZASTRZEŻENIA I AKCEPTUJESZ FAKT, ŻE JEST TO PLAC ZABAW DLA PROGRAMISTY, A NIE TERMINAL BLOOMBERGA.*
-            """
-
-            st.caption(disclaimer)
-
-            st.caption(
-                "Same picki tutaj pojawią się najpewniej dopiero po zakończeniu zbierania, potem będę musiał poczyścić dane śmieszków co wyzywają Pawła od smalczyków i rzeczników Tuska i odpalimy."
             )
