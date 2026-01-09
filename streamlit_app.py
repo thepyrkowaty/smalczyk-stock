@@ -9,8 +9,12 @@ ranking_2025, sp500_2025 = Static2025Data.get_2025_data()
 
 df, start_prices = DataLoader().prepare_static_data()
 
-yahoo_tickers = start_prices[start_prices["source"] == "YAHOO"]["ticker"].unique().tolist()
-stooq_tickers = start_prices[start_prices["source"] == "STOOQ"]["ticker"].unique().tolist()
+yahoo_tickers = (
+    start_prices[start_prices["source"] == "YAHOO"]["ticker"].unique().tolist()
+)
+stooq_tickers = (
+    start_prices[start_prices["source"] == "STOOQ"]["ticker"].unique().tolist()
+)
 
 yf_current_prices = YahooData.get_yf_prices(yahoo_tickers)
 stooq_current_prices = StooqData.get_stooq_prices(stooq_tickers)

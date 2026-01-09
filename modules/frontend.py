@@ -32,22 +32,22 @@ class Frontend:
         self.__config = {
             # 1. KOLUMNY SZTYWNE (Zawsze zajmują tyle samo miejsca, niezależnie od monitora)
             "Wynik Polska": st.column_config.NumberColumn(
-                "Wynik Polska", width=30, format="%.2f%%"
+                "Wynik Polska", width=1, format="%.2f%%"
             ),
             "Wynik Usa": st.column_config.NumberColumn(
-                "Wynik Usa", width=30, format="%.2f%%"
+                "Wynik Usa", width=1, format="%.2f%%"
             ),
             "Wynik Świat": st.column_config.NumberColumn(
-                "Wynik Świat", width=30, format="%.2f%%"
+                "Wynik Świat", width=1, format="%.2f%%"
             ),
             "Wynik Surowiec": st.column_config.NumberColumn(
-                "Wynik Surowiec", width=30, format="%.2f%%"
+                "Wynik Surowiec", width=1, format="%.2f%%"
             ),
             "Wynik Krypto": st.column_config.NumberColumn(
-                "Wynik Krypto", width=30, format="%.2f%%"
+                "Wynik Krypto", width=1, format="%.2f%%"
             ),
             "Średnia": st.column_config.NumberColumn(
-                "Średnia", width=30, format="%.2f%%"
+                "Średnia", width=1, format="%.2f%%"
             ),
             # 2. KOLUMNY ELASTYCZNE (Dostosują się do wolnego miejsca)
             # Nie podajemy 'width' w pikselach, tylko opcjonalnie "medium" lub nic

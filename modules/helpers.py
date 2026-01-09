@@ -17,8 +17,11 @@ class DataLoader:
         stock_commodities = pd.read_csv("data/2026/start_prices_commodities.csv")
         stock_world = pd.read_csv("data/2026/start_prices_world.csv")
         stock_usa = pd.read_csv("data/2026/start_prices_usa.csv")
-        df = pd.read_csv("data/2026/2026.csv", usecols=lambda column: column not in ["Czas", "Community"])
-        
+        df = pd.read_csv(
+            "data/2026/2026.csv",
+            usecols=lambda column: column not in ["Czas", "Community"],
+        )
+
         return df, pd.concat(
             [stock_poland, stock_usa, stock_world, stock_crypto, stock_commodities]
         ).reset_index(drop=True)
