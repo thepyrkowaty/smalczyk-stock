@@ -34,7 +34,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2025-12-30 12:41:55,Kamil1525,Neuca SA,Novo Nordisk,NVO,0,Alphabet Inc.,GOOG,0,URANIUM,BTC,Delord,0
 2025-12-30 12:42:48,ULI_Adam,KGHM Polska Miedź SA,Energy Transfer LP (ET),ET,1,"German American Bancorp, Inc. (GABC)",GABC,1,URANIUM,BTC,Delordione,0
 2025-12-30 12:42:58,Antecki_,Orlen SA,"Take-Two Interactive Software, Inc.",TTWO,1,Alphabet Inc.,GOOG,0,SILVER,DOGE,Delordione,0
-2025-12-30 12:43:11,Kavson,Mennica Polska SA,"Brand Engagement Network, Inc.",BNAI,1,"Praxis Precision Medicines, Inc.",PRAX,0,GOLD,SOL,Delord,0
+2025-12-30 12:43:11,Kavson*,Mennica Polska SA,"Brand Engagement Network, Inc.",BNAI,1,InPost,INPST.AS,1,GOLD,SOL,Delord,0
 2025-12-30 12:43:20,Dagon,XTB SA,ASML Holding N.V.,ASML,0,Semiconductor Manufacturing International Corporation,0981.HK,1,HIGH GRADE COPPER,ETH,delord,0
 2025-12-30 12:43:26,kamrat_jozef,CD Projekt SA,"MARA Holdings, Inc.",MARA,1,Novo Nordisk,NVO,1,COBALT,XRP,delordione,0
 2025-12-30 12:43:30,Dreyark,PGE SA,Ondas Holdings Inc.,ONDS,1,Siemens Energy AG,SIE.DE,1,GOLD,DOGE,Delmuś,0
@@ -70,7 +70,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2025-12-30 13:17:36,SzymkoQA,Cyber_Folks SA,Novo Nordisk,NVO,0,National Atomic Company Kazatomprom JSC,KAP.IL,1,PLATINUM,BTC,Delord,0
 2025-12-30 13:17:46,cordixo,Cyber_Folks SA,AST SpaceMobile Inc,ASTS,1,Taiwan Semiconductor Manufacturing,TSM,1,SILVER,BTC,delord,0
 2025-12-30 13:18:48,Cubes_2000,Neuca SA,"Micron Technology, Inc.",MU,1,Samsung Electronics Co,005930.KS,1,HIGH GRADE COPPER,ZEC,Delordione,0
-2026-01-02 10:33:00,evenement,Scanway SA,Nebius Group N.V.,NBIS,0,Rheinmetall AG,RHM.DE,1,URANIUM,ETH,delord,0
+2026-01-02 10:33:00,evenement*,Scanway SA,Rocket Lab Corporation,RKLB,1,Rheinmetall AG,RHM.DE,1,URANIUM,ETH,delord,0
 2026-01-02 10:40:17,gol3mpodlaski,Cyber_Folks SA,Applied Digital,APLD,1,Taiwan Semiconductor Manufacturing,TSM,1,PLATINUM,BTC,delord,0
 2025-12-30 13:25:34,fx_tbh,Cyber_Folks SA,"SoFi Technologies, Inc.",SOFI,1,Samsung Electronics Co,005930.KS,1,CORN,DOGE,khamires baza,0
 2025-12-30 13:33:22,Voraz,Creotech Instruments SA,"SoundHound AI, Inc.",SOUN,1,BYD,1211.HK,1,URANIUM,KAS,delordione,0
@@ -89,7 +89,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2025-12-31 13:55:43,Waldi237,Dadelo SA,Alphabet Inc.,GOOGL,1,Anheuser-Busch InBev SA/NV,ABI.BR,1,URANIUM,BNB,"Paweł ""Rzecznik Tuska"" Szabla",0
 2025-12-30 21:50:54,Wozu,Orlen SA,The Walt Disney Company,DIS,1,Berkshire Hathaway Inc.,BRK-A,0,GOLD,BTC,Smalczyka,0
 2025-12-30 21:56:08,BARNABO_BAZYLI,Creotech Instruments SA,"Amazon",AMZN,1,Novo Nordisk,NVO,1,URANIUM,BTC,DELMUŚ,0
-2025-12-30 23:02:23,sheepkacper,CD Projekt SA,"Take-Two Interactive Software, Inc.",TTWO,1,Applied Digital Corporation,APLD,0,GOLD,BTC,delordione,0
+2025-12-30 23:02:23,sheepkacper*,CD Projekt SA,"Take-Two Interactive Software, Inc.",TTWO,1,Schneider Electric S.E.,SU.PA,1,GOLD,BTC,delordione,0
 2025-12-31 01:33:08,asap_bartek,CD Projekt SA,"IonQ, Inc.",IONQ,1,Reliance Industries Limited,RELIANCE.NS,1,URANIUM,BTC,delordione,0
 2025-12-31 07:21:51,777shoty,CD Projekt SA,Funko Inc,FNKO,1,ASML Holding N.V.,ASML,1,COCOA,XRP,delord,0
 2025-12-31 08:38:09,GreyManiac,Digital Network SA,"Cisco Systems, Inc.",CSCO,1,Sony Group Corporation,SONY,1,PLATINUM,ZEC,Sernikov,0
@@ -193,7 +193,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2026-01-03 11:36:51,Mefasa,CD Projekt SA,Apple Inc.,AAPL,1,ASML Holding N.V.,ASML,1,COBALT,XRP,  delordione,0
 2026-01-03 11:38:49,Ronner,Synektik SA,"Tesla, Inc.",TSLA,1,NVIDIA Corporation,NVDA,0,COFFEE,BTC,Delordione,0
 2026-01-03 11:40:25,waj3r,CD Projekt SA,"Tesla, Inc.",TSLA,1,Toyota Motor Corporation,TM,1,PALLADIUM,DOGE,delord,0
-2026-01-03 11:40:40,najebatsu ,AB SA,NVIDIA Corporation,NVDA,1,Astronics Corporation,ATRO,0,GOLD,LTC,Delorda,0
+2026-01-03 11:40:40,najebatsu*,AB SA,NVIDIA Corporation,NVDA,1,Novo Nordisk,NVO,1,GOLD,LTC,Delorda,0
 2026-01-03 11:41:29,Honervogt,Rainbow Tours SA,"NextEra Energy, Inc.",NEE,1,ASML Holding N.V. ,ASML,1,GOLD,SOL,Delordione,0
 2026-01-03 11:41:40,tymmek1,XTB SA,"Amazon",AMZN,1,Tencent Holdings Ltd,0700.HK,1,COBALT,BTC,delmito,0
 2026-01-03 11:46:02,Karigoda,Molecure SA,"Rocket Lab USA, Inc.",RKLB,1,Scanway S.A.,SCW,0,URANIUM,SOL,Delordione,0

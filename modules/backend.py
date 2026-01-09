@@ -60,7 +60,12 @@ class Backend:
         self.__ranking["Wynik Świat"] = np.where(
             self.__ranking["Czy Świat"] == 0, 0, self.__ranking["Wynik Świat"]
         )
-        self.__ranking["Średnia"] = (
+        self.__ranking["Średnia Spółki"] = (
+            self.__ranking["Wynik Polska"]
+            + +self.__ranking["Wynik Świat"]
+            + +self.__ranking["Wynik Usa"]
+        ) / 3
+        self.__ranking["Średnia Ważona"] = (
             self.__ranking["Wynik Polska"] * 0.25
             + self.__ranking["Wynik Świat"] * 0.25
             + self.__ranking["Wynik Usa"] * 0.25
@@ -70,7 +75,7 @@ class Backend:
 
         return (
             self.__ranking.fillna(self.__values_to_fill)
-            .sort_values(by="Średnia", ascending=False)
+            .sort_values(by="Średnia Ważona", ascending=False)
             .reset_index(drop=True)
         )
 

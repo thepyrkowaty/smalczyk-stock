@@ -42,6 +42,7 @@ class YahooData:
                 interval="1d",
                 progress=False,
                 auto_adjust=True,
+                timeout=30
             )
 
             if data is None or data.empty:

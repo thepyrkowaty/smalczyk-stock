@@ -21,7 +21,8 @@ class Frontend:
             "Wynik Surowiec",
             "Krypto",
             "Wynik Krypto",
-            "Średnia",
+            "Średnia Spółki",
+            "Średnia Ważona",
             "Czy Usa",
             "Czy Świat",
             "Ticker Usa",
@@ -30,31 +31,33 @@ class Frontend:
         ]
 
         self.__config = {
-            # 1. KOLUMNY SZTYWNE (Zawsze zajmują tyle samo miejsca, niezależnie od monitora)
             "Wynik Polska": st.column_config.NumberColumn(
-                "Wynik Polska", width=1, format="%.2f%%"
+                "Wynik Polska", width="small", format="%.2f%%"
             ),
             "Wynik Usa": st.column_config.NumberColumn(
-                "Wynik Usa", width=1, format="%.2f%%"
+                "Wynik Usa", width="small", format="%.2f%%"
             ),
             "Wynik Świat": st.column_config.NumberColumn(
-                "Wynik Świat", width=1, format="%.2f%%"
+                "Wynik Świat", width="small", format="%.2f%%"
             ),
             "Wynik Surowiec": st.column_config.NumberColumn(
-                "Wynik Surowiec", width=1, format="%.2f%%"
+                "Wynik Surowiec", width="small", format="%.2f%%"
             ),
             "Wynik Krypto": st.column_config.NumberColumn(
-                "Wynik Krypto", width=1, format="%.2f%%"
+                "Wynik Krypto", width="small", format="%.2f%%"
             ),
-            "Średnia": st.column_config.NumberColumn(
-                "Średnia", width=1, format="%.2f%%"
+            "Średnia Ważona": st.column_config.NumberColumn(
+                "Średnia Ważona", width="small", format="%.2f%%"
             ),
-            # 2. KOLUMNY ELASTYCZNE (Dostosują się do wolnego miejsca)
-            # Nie podajemy 'width' w pikselach, tylko opcjonalnie "medium" lub nic
-            "Użytkownik": st.column_config.TextColumn("Użytkownik", width="small"),
-            "Spółka Polska": st.column_config.TextColumn("Spółka Polska"),
-            "Spółka Świat": st.column_config.TextColumn("Spółka Świat"),
-            "Surowiec": st.column_config.TextColumn("Surowiec"),
+            "Średnia Spółki": st.column_config.NumberColumn(
+                "Średnia Spółki", width="small", format="%.2f%%"
+            ),
+            "Użytkownik": st.column_config.TextColumn("Użytkownik", width="large"),
+            "Spółka Polska": st.column_config.TextColumn(
+                "Spółka Polska", width="medium"
+            ),
+            "Spółka Świat": st.column_config.TextColumn("Spółka Świat", width="medium"),
+            "Surowiec": st.column_config.TextColumn("Surowiec", width="medium"),
             "Krypto": st.column_config.TextColumn("Krypto"),
             # 3. UKRYTE
             "Czy Usa": None,
@@ -134,14 +137,29 @@ class Frontend:
             style["Spółka Świat"] = "background-color: #FFF0F0; color: #884444;"
             style["Wynik Świat"] = "background-color: #FFF0F0; color: #884444;"
 
-        if row["Średnia"] < 0:
-            style["Średnia"] = "background-color: red; color: black; font-weight: bold"
-        elif 0 <= row["Średnia"] < benchmark:
-            style["Średnia"] = (
+        if row["Średnia Ważona"] < 0:
+            style["Średnia Ważona"] = (
+                "background-color: red; color: black; font-weight: bold"
+            )
+        elif 0 <= row["Średnia Ważona"] < benchmark:
+            style["Średnia Ważona"] = (
                 "background-color: orange; color: black; font-weight: bold"
             )
         else:
-            style["Średnia"] = (
+            style["Średnia Ważona"] = (
+                "background-color: OliveDrab; color: black; font-weight: bold"
+            )
+
+        if row["Średnia Spółki"] < 0:
+            style["Średnia Spółki"] = (
+                "background-color: red; color: black; font-weight: bold"
+            )
+        elif 0 <= row["Średnia Spółki"] < benchmark:
+            style["Średnia Spółki"] = (
+                "background-color: orange; color: black; font-weight: bold"
+            )
+        else:
+            style["Średnia Spółki"] = (
                 "background-color: OliveDrab; color: black; font-weight: bold"
             )
 
@@ -183,8 +201,20 @@ class Frontend:
                 },
                 precision=2,
             )
-
-            st.dataframe(styled, height=560, column_config=self.__config)
+            st.subheader("👥 Wybory Użytkowników")
+            st.dataframe(styled, height="auto", column_config=self.__config)
+            st.markdown(
+                """
+            <style>
+                [data-testid="stElementToolbar"] {display: none !important;}
+            </style>
+            """,
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                "<span style='font-size: 10px; color: gray;'>Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
+                unsafe_allow_html=True,
+            )
 
         with tab3:
             st.set_page_config(page_title="Ranking giełdowy", layout="wide")
@@ -209,8 +239,8 @@ class Frontend:
                 ],
             )
             st.subheader("👥 Wybory Użytkowników")
-            st.dataframe(styler(ranking_2025), width="stretch", height=560)
+            st.dataframe(styler(ranking_2025), width="stretch", height="auto")
             st.markdown(
-                "<span style='font-size: 10px; color: gray;'>*Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
+                "<span style='font-size: 10px; color: gray;'>Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>",
                 unsafe_allow_html=True,
             )
