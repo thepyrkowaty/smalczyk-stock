@@ -3,7 +3,6 @@ import pandas as pd
 from modules.frontend_shit import Styler, FrontendHelpers, COLUMN_CONFIG, COLUMNS
 from modules.llm import get_market_analysis
 
-
 class Frontend:
     def __init__(self) -> None:
         self.page = st.empty()
@@ -11,9 +10,7 @@ class Frontend:
             self.__disclaimer = f.read()
 
         self.__disclaimer_caption = "<span style='font-size: 10px; color: gray;'>Materiały i informacje przedstawione na niniejszej stronie internetowej zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi.</span>"
-        self.__bajka_zabawa_gra = (
-            "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>"
-        )
+        self.__bajka_zabawa_gra = "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>"
         self.__disable_toolbox = """
             <style>
                 [data-testid="stElementToolbar"] {display: none !important;}
@@ -26,6 +23,7 @@ class Frontend:
             unsafe_allow_html=True,
         )
 
+
     def run_frontend(self, ranking_2025, sp500_2025, ranking_2026, sp500_2026):
         self.page.empty()
         tab1, tab2, tab3 = st.tabs(["Disclaimer", "Ranking 2026", "Ranking 2025"])
@@ -36,10 +34,7 @@ class Frontend:
         with tab2:
             st.set_page_config(page_title="Ranking giełdowy", layout="wide")
             st.title("📈 Ranking Giełdowy - Paweł Delord Szabla 2026")
-            st.markdown(
-                self.__bajka_zabawa_gra,
-                unsafe_allow_html=True,
-            )
+            st.markdown(self.__bajka_zabawa_gra, unsafe_allow_html=True,)
             st.subheader("SP500 Benchmark")
             styler = Styler.styler_2025(percent_column=["Wynik"])
             st.dataframe(
@@ -64,11 +59,9 @@ class Frontend:
             )
             st.subheader("👥 Wybory Użytkowników")
             st.dataframe(styled, height="auto", column_config=COLUMN_CONFIG)
-            leader, pl, usa, world = ranking_2026.iloc[0][
-                ["Użytkownik", "Spółka Polska", "Spółka Usa", "Spółka Świat"]
-            ]
+            leader, pl, usa, world = ranking_2026.iloc[0][["Użytkownik","Spółka Polska", "Spółka Usa", "Spółka Świat"]]
             st.subheader(f"👥 Analiza spółek lidera - {leader}")
-            st.caption("Poniższe informacje wygenerowała darmowa wersja Gemini  ")
+            st.caption("Poniższe informacje wygenerowała darmowa wersja Gemini - Nie traktuj ich jako rekomendacji ani porady inwestycyjnej bo model może gadać głupoty wyssane z palca.")
             col1, col2, col3 = st.columns(3)
             with col1:
                 st.write(f"**Polska:** {pl}")
@@ -87,10 +80,7 @@ class Frontend:
             st.title(
                 "📈 Ranking Giełdowy - Paweł Delord Szabla 2025 - oficjalne wyniki bo koniec roku*"
             )
-            st.markdown(
-                self.__bajka_zabawa_gra,
-                unsafe_allow_html=True,
-            )
+            st.markdown(self.__bajka_zabawa_gra, unsafe_allow_html=True,)
             st.subheader("SP500 Benchmark")
             styler = Styler.styler_2025(percent_column=["Zmiana procentowa"])
             st.dataframe(styler(sp500_2025), hide_index=True, width="content")
@@ -106,7 +96,4 @@ class Frontend:
             )
             st.subheader("👥 Wybory Użytkowników")
             st.dataframe(styler(ranking_2025), width="stretch", height="auto")
-            st.markdown(
-                self.__disclaimer_caption,
-                unsafe_allow_html=True,
-            )
+            st.markdown(self.__disclaimer_caption, unsafe_allow_html=True,)
