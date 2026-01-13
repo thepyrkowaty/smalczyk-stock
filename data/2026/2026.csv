@@ -104,7 +104,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2025-12-31 09:32:01,Kolanko,Cyber_Folks SA,Alphabet Inc. ,GOOG,1,Tata Consultancy Services Limited,TCS.NS,1,PLATINUM,ETH,delord,0
 2025-12-31 09:34:19,d30o,CD Projekt SA,NVIDIA Corporation,NVDA,1,Novo Nordisk,NVO,1,URANIUM,XRP,Delord,0
 2025-12-31 09:35:05,shodi22,Tauron PE SA,Sphere Entertainment Co.,SPHR,1,"Baidu, Inc.",BIDU,1,GOLD,BTC,Delord,0
-2025-12-31 09:38:18,szymsen1,CD Projekt SA,TROOPS Inc,TROO,1,ASML Holding N.V.,ASML,1,COTTON #2,XRP,Delordione,0
+2025-12-31 09:38:18,szymsen1,CD Projekt SA,TROOPS Inc,TROO,0,ASML Holding N.V.,ASML,1,COTTON #2,XRP,Delordione,0
 2025-12-31 09:38:39,Malbor,Synektik SA,Palantir Technologies Inc.,PLTR,1,Rheinmetall AG,RHM.DE,1,HIGH GRADE COPPER,SOL,Delord,0
 2025-12-31 09:42:59,alcoholic_jichadist,Synektik SA,Vertex Pharmaceuticals Inc.,VRTX,1,Taiwan Semiconductor Manufacturing,TSM,1,URANIUM,SOL,DisStream,0
 2025-12-31 09:45:08,sebko13,CD Projekt SA,Zeta Global Holdings Corp.,ZETA,1,PSI Software SE,PSAN.DE,1,GOLD,BTC,delord,0
@@ -228,7 +228,7 @@ Czas,Użytkownik,Spółka Polska,Spółka Usa,Ticker Usa,Czy Usa,Spółka Świat
 2026-01-05 11:20:42,Greyclif,LPP SA,"Micron Technology, Inc.",MU,1,"Micronics Japan Co., Ltd. ",6871.T,1,SILVER,XRP,Delordione (Delordzik),0
 2026-01-05 11:21:58,Darrside,LPP SA,JPMorgan Chase & Co.,JPM,1,NVIDIA Corporation,NVDA,0,GOLD,BTC,Delordione,0
 2026-01-05 11:23:26,philkin,Synektik SA,Palantir Technologies Inc.,PLTR,1,ASML Holding N.V.,ASML,1,HIGH GRADE COPPER,BTC,smalczyk,0
-2026-01-05 11:24:20,synkhamiresa,KGHM Polska Miedź SA,Taiwan Semiconductor Manufacturing,TSM,0,Montana Aerospace AG,AEROZ.XC,1,HIGH GRADE COPPER,BTC,khamires,0
+2026-01-05 11:24:20,synkhamiresa*,KGHM Polska Miedź SA,Applied Materials,AMAT,1,Montana Aerospace AG,AEROZ.XC,1,HIGH GRADE COPPER,BTC,khamires,0
 2026-01-05 11:27:23,Lechu,PKO BP SA,Chevron Corporation,CVX,1,BYD,1211.HK,1,PLATINUM,XRP,Dildord,0
 2026-01-05 11:34:35,ryzykowny inwestor,Passus SA,T1 Energy Inc.,TE,1,Novo Nordisk,NVO,1,HIGH GRADE COPPER,XRP,delord,0
 2026-01-05 11:38:51,sadurka,Bioceltix SA,"Super Micro Computer, Inc.",SMCI,1,Samsung Electronics Co,005930.KS,1,URANIUM,RENDER,Patiro,0
