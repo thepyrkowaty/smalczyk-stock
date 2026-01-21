@@ -35,7 +35,6 @@ class YahooData:
     @st.cache_data(ttl=28800)
     def get_yf_prices(tickers):
         try:
-            # 1. Pobieramy dane (period 7d daje zapas na polskie święta/weekendy)
             data = yf.download(
                 tickers=tickers,
                 period="7d",
@@ -90,7 +89,8 @@ class StooqData:
                 else None
             )
         except:
-            raise Exception(f"Nie dziala stooq dla {ticker} SAD")
+            print(f"Nie dziala stooq dla {ticker} SAD")
+            return None
 
     @staticmethod
     def get_stooq_prices(tickers):

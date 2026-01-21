@@ -3,7 +3,7 @@ from google import genai
 from google.genai import types
 
 # 1. Konfiguracja klienta (klucz pobierany ze st.secrets)
-client = genai.Client(api_key=st.secrets["API_KEY"])
+client = genai.Client(api_key="xd")
 
 
 @st.cache_data(ttl=28800)
