@@ -2,8 +2,7 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
-# client = genai.Client(api_key=st.secrets["API_KEY"])
-client = genai.Client(api_key="Xdd")
+client = genai.Client(api_key=st.secrets["API_KEY"])
 
 
 @st.cache_data(ttl=28800)

@@ -30,7 +30,9 @@ class Frontend:
 
     def __render_ai_section(self, leader_row):
         st.subheader(f"👥 Analiza spółek lidera - {leader_row['Użytkownik']}")
-        st.caption("Poniższe informacje wygenerowała darmowa wersja Gemini...")
+        st.caption(
+            "Poniższe informacje wygenerowała darmowa wersja Gemini - Nie traktuj ich jako rekomendacji ani porady inwestycyjnej bo model może gadać głupoty wyssane z palca."
+        )
 
         mapping = [
             ("Polska", "Spółka Polska"),
