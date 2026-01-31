@@ -24,38 +24,26 @@ COLUMNS = [
     "Czy Streamer",
 ]
 
+PERCENT_COLS = [
+    "Wynik Polska",
+    "Wynik Usa",
+    "Wynik Świat",
+    "Wynik Surowiec",
+    "Wynik Krypto",
+    "Średnia Ważona",
+    "Średnia Spółki",
+]
+
 COLUMN_CONFIG = {
-    "Wynik Polska": st.column_config.NumberColumn(
-        "Wynik Polska", width="small", format="%.2f%%"
-    ),
-    "Wynik Usa": st.column_config.NumberColumn(
-        "Wynik Usa", width="small", format="%.2f%%"
-    ),
-    "Wynik Świat": st.column_config.NumberColumn(
-        "Wynik Świat", width="small", format="%.2f%%"
-    ),
-    "Wynik Surowiec": st.column_config.NumberColumn(
-        "Wynik Surowiec", width="small", format="%.2f%%"
-    ),
-    "Wynik Krypto": st.column_config.NumberColumn(
-        "Wynik Krypto", width="small", format="%.2f%%"
-    ),
-    "Średnia Ważona": st.column_config.NumberColumn(
-        "Średnia Ważona", width="small", format="%.2f%%"
-    ),
-    "Średnia Spółki": st.column_config.NumberColumn(
-        "Średnia Spółki", width="small", format="%.2f%%"
-    ),
     "Użytkownik": st.column_config.TextColumn("Użytkownik", width="large"),
     "Spółka Polska": st.column_config.TextColumn("Spółka Polska", width="medium"),
     "Spółka Świat": st.column_config.TextColumn("Spółka Świat", width="medium"),
     "Surowiec": st.column_config.TextColumn("Surowiec", width="medium"),
     "Krypto": st.column_config.TextColumn("Krypto"),
-    "Czy Usa": None,
-    "Czy Świat": None,
-    "Ticker Usa": None,
-    "Ticker Świat": None,
-    "Czy Streamer": None,
+    **{
+        c: None
+        for c in ["Czy Usa", "Czy Świat", "Ticker Usa", "Ticker Świat", "Czy Streamer"]
+    },
 }
 
 
@@ -88,29 +76,28 @@ class Styler:
     def styler_2026(row, benchmark):
         style = pd.Series("", index=row.index)
 
-        # 1. Kolorowanie Streamera
+        # 1. Streamer
         if row["Czy Streamer"] == 1:
             style["Użytkownik"] = "background-color: yellow; color: black;"
 
-        # 2. Ukrywanie nieaktywnych rynków (USA i Świat)
+        # 2. Nieaktywne rynki
         for market in ["Usa", "Świat"]:
             if row[f"Czy {market}"] == 0:
-                color_style = "background-color: #FFF0F0; color: #884444;"
-                style[f"Spółka {market}"] = color_style
-                style[f"Wynik {market}"] = color_style
+                s = "background-color: #FFF0F0; color: #884444;"
+                style[f"Spółka {market}"] = style[f"Wynik {market}"] = s
 
-        # 3. Logika kolorowania wyników (Średnia Ważona i Średnia Spółki)
-        def get_score_style(val):
+        # 3. Wyniki
+        def get_color(val):
             if val < 0:
-                bg = "red"
-            elif val < benchmark:
-                bg = "orange"
-            else:
-                bg = "OliveDrab"
-            return f"background-color: {bg}; color: black; font-weight: bold"
+                return "red"
+            if val < benchmark:
+                return "orange"
+            return "OliveDrab"
 
         for col in ["Średnia Ważona", "Średnia Spółki"]:
-            style[col] = get_score_style(row[col])
+            style[col] = (
+                f"background-color: {get_color(row[col])}; color: black; font-weight: bold"
+            )
 
         return style
 
@@ -125,20 +112,13 @@ class FrontendHelpers:
 
     @staticmethod
     def img_to_html(img_path, message, height="80vh"):
-        return """
-        <div style="
-            height:{height};
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-        ">
-        <img src="data:image/png;base64,{src}" class="img-fluid" style="width:124px; margin-bottom:10px;" />
-        <div style="font-size:36px; font-weight:800; letter-spacing:4px;">
-            {message}
+        src = FrontendHelpers.img_to_bytes(img_path)
+        return f"""
+        <div style="height:{height}; display:flex; flex-direction:column; 
+                    justify-content:center; align-items:center; text-align:center;">
+            <img src="data:image/png;base64,{src}" style="width:124px; margin-bottom:10px;" />
+            <div style="font-size:36px; font-weight:800; letter-spacing:4px;">
+                {message}
+            </div>
         </div>
-        </div>
-        """.format(
-            src=FrontendHelpers.img_to_bytes(img_path), message=message, height=height
-        )
+        """

@@ -2,41 +2,36 @@ import pandas as pd
 import streamlit as st
 import json
 import yfinance as yf
+import glob
 from datetime import date, datetime
 
 
 class DataLoader:
-    def __init__(self):
-        pass
-
     @staticmethod
     @st.cache_data
     def prepare_static_data():
-        stock_poland = pd.read_csv("data/2026/start_prices_pl.csv")
-        stock_crypto = pd.read_csv("data/2026/start_prices_crypto.csv")
-        stock_commodities = pd.read_csv("data/2026/start_prices_commodities.csv")
-        stock_world = pd.read_csv("data/2026/start_prices_world.csv")
-        stock_usa = pd.read_csv("data/2026/start_prices_usa.csv")
-        df = pd.read_csv(
-            "data/2026/2026.csv",
-            usecols=lambda column: column not in ["Czas", "Community"],
+        path = "data/2026/start_prices_*.csv"
+        all_files = glob.glob(path)
+
+        stock_dfs = [pd.read_csv(f) for f in all_files]
+
+        df_ranking = pd.read_csv(
+            "data/2026/2026.csv", usecols=lambda col: col not in ["Czas", "Community"]
         )
 
-        return df, pd.concat(
-            [stock_poland, stock_usa, stock_world, stock_crypto, stock_commodities]
-        ).reset_index(drop=True)
+        combined_stocks = pd.concat(stock_dfs, ignore_index=True)
+        return df_ranking, combined_stocks
 
 
 class YahooData:
-    def __init__(self):
-        pass
-
     @staticmethod
     @st.cache_data(ttl=28800)
     def get_yf_prices(tickers):
+        unique_tickers = list(set(filter(None, tickers)))
+
         try:
             data = yf.download(
-                tickers=tickers,
+                tickers=unique_tickers,
                 period="7d",
                 interval="1d",
                 progress=False,
@@ -47,35 +42,25 @@ class YahooData:
             if data is None or data.empty:
                 return pd.DataFrame(columns=["ticker", "price_now"])
 
-            close_prices = data["Close"]
-            filled_data = close_prices.ffill().bfill()
+            close_prices = data["Close"].ffill().bfill()
+            last_row = close_prices.iloc[-1]
 
-            last_row = filled_data.iloc[-1]
+            result = last_row.reset_index()
+            result.columns = ["ticker", "price_now"]
 
-            if isinstance(last_row, pd.Series):
-                result = last_row.reset_index()
-                result.columns = ["ticker", "price_now"]
-            else:
-                result = pd.DataFrame(
-                    {
-                        "ticker": [tickers if isinstance(tickers, str) else tickers[0]],
-                        "price_now": [last_row],
-                    }
-                )
-
-            result["price_now"] = result["price_now"].round(10)
+            result = result.drop_duplicates(subset="ticker")
+            result["price_now"] = pd.to_numeric(
+                result["price_now"], errors="coerce"
+            ).round(10)
 
             return result
 
         except Exception as e:
-            print(f"Błąd pobierania danych: {e}")
+            st.error(f"⚠️ Błąd pobierania danych: {e}")
             return pd.DataFrame(columns=["ticker", "price_now"])
 
 
 class StooqData:
-    def __init__(self):
-        pass
-
     @staticmethod
     @st.cache_data(ttl=28800)
     def __stooq_yesterday_close(ticker):
@@ -103,9 +88,6 @@ class StooqData:
 
 
 class Static2025Data:
-    def __init__(self) -> None:
-        pass
-
     @staticmethod
     @st.cache_data()
     def get_2025_data():

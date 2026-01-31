@@ -2,8 +2,8 @@ import streamlit as st
 from google import genai
 from google.genai import types
 
-# 1. Konfiguracja klienta (klucz pobierany ze st.secrets)
-client = genai.Client(api_key="xd")
+# client = genai.Client(api_key=st.secrets["API_KEY"])
+client = genai.Client(api_key="Xdd")
 
 
 @st.cache_data(ttl=28800)
@@ -27,7 +27,7 @@ def get_market_analysis(company):
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite",
             contents=prompt,
-            config=types.GenerateContentConfig(tools=[search_tool]),
+            config=types.GenerateContentConfig(tools=[search_tool], temperature=0.2),
         )
         if response.text:
             return response.text
