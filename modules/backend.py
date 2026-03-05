@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 class Backend:
@@ -19,9 +20,13 @@ class Backend:
         ]
 
         stats["diff"] = (
-            ((stats["price_now"] - stats["start_price"]) / stats["start_price"] * 100)
-            .round(2)
+            (
+                (stats["price_now"] - stats["start_price"])
+                / stats["start_price"].replace(0, np.nan)
+                * 100
+            )
             .fillna(0)
+            .round(2)
         )
 
         self.__ticker_map = stats.groupby("ticker")["diff"].last()

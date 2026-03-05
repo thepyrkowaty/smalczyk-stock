@@ -3,7 +3,9 @@ import streamlit as st
 import json
 import yfinance as yf
 import glob
+import requests
 from datetime import date, datetime
+from bs4 import BeautifulSoup
 
 
 class DataLoader:
@@ -83,6 +85,35 @@ class StooqData:
             {
                 ticker: StooqData.__stooq_yesterday_close(ticker) for ticker in tickers
             }.items(),
+            columns=["ticker", "price_now"],
+        )
+
+
+class NewConnect:
+    @staticmethod
+    @st.cache_data(ttl=28800)
+    def __get_NC_price(ticker):
+        url = f"https://www.biznesradar.pl/notowania/{ticker}"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+            price_string = soup.find("span", class_="q_ch_act").text.strip()
+            price = float(price_string.replace(",", ".").replace(" ", ""))
+            return price
+
+        except Exception as e:
+            print(f"Błąd dla {ticker}: {e}")
+            return None
+
+    @staticmethod
+    def get_prices(tickers):
+        return pd.DataFrame(
+            {ticker: NewConnect.__get_NC_price(ticker) for ticker in tickers}.items(),
             columns=["ticker", "price_now"],
         )
 
