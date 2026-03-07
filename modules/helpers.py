@@ -118,6 +118,46 @@ class NewConnect:
         )
 
 
+class BankierData:
+    @staticmethod
+    @st.cache_data(ttl=28800)
+    def __get_bankier_price(ticker):
+        url = f"https://www.bankier.pl/inwestowanie/profile/quote.html?symbol={ticker}"
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        try:
+            response = requests.get(url, headers=headers, timeout=15)
+            response.raise_for_status()
+
+            soup = BeautifulSoup(response.text, "html.parser")
+            price_element = soup.find("span", class_="a-quote-item -value")
+
+            if price_element:
+                raw_text = price_element.get_text(strip=True)
+                price_clean = ""
+                for char in raw_text:
+                    if char.isdigit() or char in ",.":
+                        price_clean += char
+                final_price = float(price_clean.replace(",", "."))
+                return final_price
+            return None
+
+        except Exception as e:
+            print(f"Błąd dla {ticker}: {e}")
+            return None
+
+    @staticmethod
+    def get_prices(tickers):
+        return pd.DataFrame(
+            {
+                ticker: BankierData.__get_bankier_price(ticker) for ticker in tickers
+            }.items(),
+            columns=["ticker", "price_now"],
+        )
+
+
 class Static2025Data:
     @staticmethod
     @st.cache_data()

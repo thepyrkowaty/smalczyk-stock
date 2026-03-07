@@ -1,5 +1,12 @@
 import pandas as pd
-from modules.helpers import DataLoader, YahooData, NewConnect, StooqData, Static2025Data
+from modules.helpers import (
+    DataLoader,
+    YahooData,
+    NewConnect,
+    StooqData,
+    Static2025Data,
+    BankierData,
+)
 from modules.backend import Backend
 from modules.frontend import Frontend
 
@@ -16,12 +23,15 @@ nc_tickers = start_prices[start_prices["source"] == "NC"]["ticker"].unique().tol
 stooq_tickers = (
     start_prices[start_prices["source"] == "STOOQ"]["ticker"].unique().tolist()
 )
+bankier_tickers = (
+    start_prices[start_prices["source"] == "BANKIER"]["ticker"].unique().tolist()
+)
 
 yf_current_prices = YahooData.get_yf_prices(yahoo_tickers)
 nc_current_prices = NewConnect.get_prices(nc_tickers)
-stooq_current_prices = StooqData.get_stooq_prices(stooq_tickers)
+bankier_current_prices = BankierData.get_prices(bankier_tickers)
 all_prices = pd.concat(
-    [yf_current_prices, nc_current_prices, stooq_current_prices]
+    [yf_current_prices, nc_current_prices, bankier_current_prices]
 ).fillna(0)
 
 sp500_benchmark_current_price = YahooData.get_yf_prices(["^GSPC"])
