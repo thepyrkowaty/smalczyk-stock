@@ -3,12 +3,13 @@ from modules.helpers import (
     DataLoader,
     YahooData,
     NewConnect,
-    StooqData,
     Static2025Data,
-    BankierData,
+    NickelData,
 )
 from modules.backend import Backend
 from modules.frontend import Frontend
+
+import streamlit as st
 
 frontend = Frontend()
 frontend.waiting_screen()
@@ -16,29 +17,18 @@ ranking_2025, sp500_2025 = Static2025Data.get_2025_data()
 
 df, start_prices = DataLoader().prepare_static_data()
 
-yahoo_tickers = (
-    start_prices[start_prices["source"] == "YAHOO"]["ticker"].unique().tolist()
-)
-nc_tickers = start_prices[start_prices["source"] == "NC"]["ticker"].unique().tolist()
-stooq_tickers = (
-    start_prices[start_prices["source"] == "STOOQ"]["ticker"].unique().tolist()
-)
-bankier_tickers = (
-    start_prices[start_prices["source"] == "BANKIER"]["ticker"].unique().tolist()
-)
+all_t = pd.Series(df.filter(like="Ticker").values.flatten()).dropna().unique()
 
-yf_current_prices = YahooData.get_yf_prices(yahoo_tickers)
-nc_current_prices = NewConnect.get_prices(nc_tickers)
-bankier_current_prices = BankierData.get_prices(bankier_tickers)
-all_prices = pd.concat(
-    [yf_current_prices, nc_current_prices, bankier_current_prices]
-).fillna(0)
+yahoo_tickers = [t.split(":")[1] for t in all_t if t.startswith("YAHOO:")]
+bankier_tickers = [t.split(":")[1] for t in all_t if t.startswith("BANKIER:")]
+nc_tickers = [t.split(":")[1] for t in all_t if t.startswith("NC:")]
 
-sp500_benchmark_current_price = YahooData.get_yf_prices(["^GSPC"])
+yf_ytd = YahooData.get_yf_ytd(yahoo_tickers)
+nc_ytd = NewConnect.get_nc_ytd(nc_tickers)
+nickel_ytd = NickelData.get_nickel_ytd()
 
-backend = Backend(sp500_benchmark_current_price, start_prices, all_prices, df)
-
-sp500_2026 = backend.get_prices_and_ranking()
-ranking_2026 = backend.get_ranking()
-
+all_ytd = pd.concat([yf_ytd, nc_ytd, nickel_ytd]).fillna(0)
+sp500_ytd = YahooData.get_yf_ytd(["^GSPC"])
+backend = Backend(all_ytd, df, sp500_ytd)
+ranking_2026, sp500_2026 = backend.get_ranking()
 frontend.run_frontend(ranking_2025, sp500_2025, ranking_2026, sp500_2026)
