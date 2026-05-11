@@ -160,8 +160,7 @@ class NewConnect:
             return float(q_ch_per_txt)
 
         except Exception as e:
-            st.error(f"⚠️ Krytyczny błąd pobierania danych NC: {e}")
-            return pd.DataFrame(columns=["ticker", "ytd_change"])
+            return 0.0
 
     @staticmethod
     def get_nc_ytd(tickers):
@@ -226,7 +225,7 @@ class NickelData:
             )
         except Exception as e:
             st.error(f"⚠️ Krytyczny błąd pobierania danych NICKEL: {e}")
-            return pd.DataFrame(columns=["ticker", "ytd_change"])
+            return 0.0
 
     @staticmethod
     def get_nickel_ytd():
