@@ -364,7 +364,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("mode", choices=["all", "daily"],
                          help="all = pelny reload historii, daily = sprawdzenie/dopisanie ostatniego dnia")
-    parser.add_argument("--db", default="/home/debian/data/bazarek.db")
+    parser.add_argument("--db", default="/home/debian/smalczyk-stock/data/bazarek.db")
     parser.add_argument("--last-year-end", default="2025-12-31")
     args = parser.parse_args()
 
