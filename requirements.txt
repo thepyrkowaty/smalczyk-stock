@@ -2,3 +2,4 @@ streamlit==1.52.0
 pandas==2.3.3
 yfinance==0.2.66
 google-genai==1.57.0
+streamlit_shortcuts==1.2.1

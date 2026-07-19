@@ -4,6 +4,7 @@ import base64
 from pathlib import Path
 
 COLUMNS = [
+    "Miejsce",
     "Użytkownik",
     "Spółka Polska",
     "Wynik Polska",
@@ -46,6 +47,29 @@ COLUMN_CONFIG = {
     },
 }
 
+DISCLAIMER_CAPTION = (
+    "<span style='font-size: 10px; color: gray;'>"
+    "Materiały i informacje przedstawione na niniejszej stronie internetowej "
+    "zamieszczone są jedynie w celu informacyjnym. Nie stanowią one porady "
+    "inwestycyjnej, nawet jeśli wyraźnie wskazują na spółkę lub papier wartościowy. "
+    "Niniejsze informacje nie stanowią oferty inwestycyjnej, rekomendacji "
+    "inwestycyjnej czy oferty świadczenia jakiejkolwiek usługi."
+    "</span>"
+)
+
+BAJKA_ZABAWA_GRA = (
+    "<span style='font-size: 20px; color: red;'>**#bajka #zabawa #gra**</span>"
+)
+
+DISABLE_TOOLBOX = """
+<style>
+    [data-testid="stElementToolbar"] {display: none !important;}
+</style>
+"""
+
+MENU_RANKING_2026 = "Ranking 2026"
+MENU_RANKING_2025 = "Ranking 2025"
+MENU_DISCLAIMER = "Disclaimer"
 
 class Styler:
 
@@ -73,21 +97,29 @@ class Styler:
         return apply
 
     @staticmethod
-    def styler_2026(row, benchmark):
+    def styler_2026(row, sp500_df, day):
         style = pd.Series("", index=row.index)
-
-        # 1. Streamer
-        if row["Czy Streamer"] == 1:
+        benchmark = sp500_df.loc[sp500_df["day"] == day, "ytd_change"].iloc[-1]
+        if row.get("Czy Streamer", 0) == 1 and "Użytkownik" in style.index:
             style["Użytkownik"] = "background-color: yellow; color: black;"
 
-        # 2. Nieaktywne rynki
         for market in ["Usa", "Świat"]:
-            if row[f"Czy {market}"] == 0:
-                s = "background-color: #FFF0F0; color: #884444;"
-                style[f"Spółka {market}"] = style[f"Wynik {market}"] = s
+            czy_col = f"Czy {market}"
+            spolka_col = f"Spółka {market}"
+            wynik_col = f"Wynik {market}"
 
-        # 3. Wyniki
+            if czy_col in row.index and row[czy_col] == 0:
+                s = "background-color: #FFF0F0; color: #884444;"
+                if spolka_col in style.index:
+                    style[spolka_col] = s
+                if wynik_col in style.index:
+                    style[wynik_col] = s
+
         def get_color(val):
+            if pd.isna(val):
+                return ""
+            if benchmark is None or pd.isna(benchmark):
+                return "lightgray"
             if val < 0:
                 return "red"
             if val < benchmark:
@@ -95,9 +127,12 @@ class Styler:
             return "OliveDrab"
 
         for col in ["Średnia Ważona", "Średnia Spółki"]:
-            style[col] = (
-                f"background-color: {get_color(row[col])}; color: black; font-weight: bold"
-            )
+            if col in row.index:
+                color = get_color(row[col])
+                if color:
+                    style[col] = (
+                        f"background-color: {color}; color: black; font-weight: bold;"
+                    )
 
         return style
 

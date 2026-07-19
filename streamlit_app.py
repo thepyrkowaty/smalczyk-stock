@@ -1,34 +1,44 @@
 import pandas as pd
 from modules.helpers import (
-    DataLoader,
-    YahooData,
-    NewConnect,
     Static2025Data,
-    NickelData,
+    XTBData,
+    Database
 )
-from modules.backend import Backend
 from modules.frontend import Frontend
+import sqlite3
 
 import streamlit as st
 
 frontend = Frontend()
-frontend.waiting_screen()
-ranking_2025, sp500_2025 = Static2025Data.get_2025_data()
 
-df, start_prices = DataLoader().prepare_static_data()
+@st.cache_data(show_spinner=False)
+def load_data():
+    conn = sqlite3.connect(r"data/bazarek.db")
 
-all_t = pd.Series(df.filter(like="Ticker").values.flatten()).dropna().unique()
+    ranking_2025, sp500_2025 = Static2025Data.get_2025_data()
+    database = Database()
 
-yahoo_tickers = [t.split(":")[1] for t in all_t if t.startswith("YAHOO:")]
-bankier_tickers = [t.split(":")[1] for t in all_t if t.startswith("BANKIER:")]
-nc_tickers = [t.split(":")[1] for t in all_t if t.startswith("NC:")]
+    ranking_2026 = database.get_ranking(conn)
+    ranking_all = database.get_ranking_all(conn)
+    sp500_2026 = database.get_benchmark(conn)
+    sp500_all = database.get_benchmark_all(conn)
+    xtb_data = XTBData().get_xtb_data()
 
-yf_ytd = YahooData.get_yf_ytd(yahoo_tickers)
-nc_ytd = NewConnect.get_nc_ytd(nc_tickers)
-nickel_ytd = NickelData.get_nickel_ytd()
+    conn.close()
 
-all_ytd = pd.concat([yf_ytd, nc_ytd, nickel_ytd]).fillna(0)
-sp500_ytd = YahooData.get_yf_ytd(["^GSPC"])
-backend = Backend(all_ytd, df, sp500_ytd)
-ranking_2026, sp500_2026 = backend.get_ranking()
-frontend.run_frontend(ranking_2025, sp500_2025, ranking_2026, sp500_2026)
+    return ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all, xtb_data
+
+if "initial_loading_done" not in st.session_state:
+    frontend.waiting_screen()
+    data = load_data()
+    st.session_state.initial_loading_done = True
+else:
+    data = load_data()
+
+ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all, xtb_data = data
+
+frontend.run_frontend(
+    ranking_2025, sp500_2025,
+    ranking_2026,
+    ranking_all, sp500_all
+)
