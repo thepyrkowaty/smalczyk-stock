@@ -22,7 +22,7 @@ def load_data():
     ranking_all = database.get_ranking_all(conn)
     sp500_2026 = database.get_benchmark(conn)
     sp500_all = database.get_benchmark_all(conn)
-    xtb_data = XTBData().get_xtb_data()
+    # xtb_data = XTBData().get_xtb_data()
 
     conn.close()
 
