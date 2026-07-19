@@ -26,7 +26,7 @@ def load_data():
 
     conn.close()
 
-    return ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all, xtb_data
+    return ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all
 
 if "initial_loading_done" not in st.session_state:
     frontend.waiting_screen()
@@ -35,7 +35,7 @@ if "initial_loading_done" not in st.session_state:
 else:
     data = load_data()
 
-ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all, xtb_data = data
+ranking_2025, sp500_2025, ranking_2026, sp500_2026, ranking_all, sp500_all = data
 
 frontend.run_frontend(
     ranking_2025, sp500_2025,
