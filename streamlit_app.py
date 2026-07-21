@@ -11,7 +11,7 @@ import streamlit as st
 
 frontend = Frontend()
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=14400)
 def load_data():
     conn = sqlite3.connect(r"data/bazarek.db")
 
