@@ -115,7 +115,7 @@ def get_yf_history(tickers, last_year_end="2025-12-31", buffer_days=10, end_date
         mask = (result["ticker"] == tk) & (pd.to_datetime(result["day"]) >= CUTOFF_DATE)
         result.loc[mask, "close_price"] = result.loc[mask, "close_price"] + adj
 
-        return result[["ticker", "day", "close_price"]]
+    return result[["ticker", "day", "close_price"]]
 
 
 def fill_all_calendar_days(hist_df, last_year_end="2025-12-31", end_date=None):

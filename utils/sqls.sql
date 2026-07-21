@@ -215,8 +215,7 @@ ranking AS (
                 COALESCE(world_ytd, 0) * 0.25 +
                 COALESCE(commodity_ytd, 0) * 0.15 +
                 COALESCE(crypto_ytd, 0) * 0.10
-            ) / 5.0,
-            2
+            ),2
         ) AS avg
     FROM joined
 )
