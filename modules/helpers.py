@@ -36,29 +36,25 @@ class XTBData:
             return 
         
 class Database:
-    @staticmethod
-    @st.cache_data(ttl=14400)    
+    @staticmethod  
     def get_ranking(_conn):
         query = f"""SELECT * FROM current_ranking"""
         result = pd.read_sql_query(query, _conn)
         return result
     
     @staticmethod
-    @st.cache_data(ttl=14400)
     def get_benchmark(_conn):
         query = f"""SELECT 'SP500' as Benchmark, ytd_change FROM stock_latest_ytd WHERE ticker = 'YAHOO:^GSPC'"""
         result = pd.read_sql_query(query, _conn)
         return result
     
-    @staticmethod
-    @st.cache_data(ttl=14400)    
+    @staticmethod  
     def get_benchmark_all(_conn):
         query = f"""SELECT day, ytd_change FROM stock_prices WHERE ticker = 'YAHOO:^GSPC'"""
         result = pd.read_sql_query(query, _conn)
         return result
 
     @staticmethod
-    @st.cache_data(ttl=14400)    
     def get_ranking_all(_conn):
         query = f"""SELECT * FROM ranking"""
         result = pd.read_sql_query(query, _conn)
